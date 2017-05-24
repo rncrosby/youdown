@@ -10,12 +10,14 @@
 #import <AVFoundation/AVFoundation.h>
 #import "References.h"
 #import "UIColor+BFPaperColors.h"
-#import "PostGroupsCollectionCell.h"
 #import "PostFriendsTableCell.h"
 #import "friendObject.h"
 #import "groupObject.h"
+#import "EditGroup.h"
+#import "InboxTableCell.h"
 
 @interface PostView : UIViewController <UITextFieldDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource> {
+    bool alertIsShowing;
     NSString *groupSelected;
     __weak IBOutlet UIImageView *backgroundImage;
     // create post view
@@ -44,9 +46,14 @@
     // send subviews
     
     
+    // inbox shit
     
+    __weak IBOutlet UITableView *inboxtable;
+    __weak IBOutlet UIScrollView *inboxscrollview;
 }
 
+@property (nonatomic) NSString *groupNameNew;
+@property (nonatomic) NSMutableArray *groupMembersNew;
 
 
 

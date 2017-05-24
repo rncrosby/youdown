@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "groupObject.h"
 
 @interface PostFriendsTableCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *isSelected;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *fact;
-
+@property (weak, nonatomic) IBOutlet groupObject *groupMembers;
 @end

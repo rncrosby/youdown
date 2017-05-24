@@ -35,13 +35,12 @@
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61p-sB-QxH">
                         <rect key="frame" x="316" y="22" width="21" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.1176028252" green="0.90044128889999997" blue="0.38785716889999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.076150998469999995" green="0.62040072680000002" blue="0.99856513739999997" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
@@ -49,7 +48,7 @@
                 <outlet property="isSelected" destination="61p-sB-QxH" id="2FO-cd-Y6g"/>
                 <outlet property="name" destination="nze-re-rbI" id="EuL-ac-dY5"/>
             </connections>
-            <point key="canvasLocation" x="-161.5" y="-96.5"/>
+            <point key="canvasLocation" x="-163" y="-93"/>
         </tableViewCell>
     </objects>
 </document>

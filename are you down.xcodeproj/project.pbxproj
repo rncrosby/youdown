@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD48D09D1ED4CABF00F22122 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD48D09C1ED4CABF00F22122 /* IntentsUI.framework */; };
 		AD867BD81ECE9A28002C195A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD867BD71ECE9A28002C195A /* main.m */; };
 		AD867BDB1ECE9A28002C195A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD867BDA1ECE9A28002C195A /* AppDelegate.m */; };
 		AD867BE11ECE9A28002C195A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD867BDF1ECE9A28002C195A /* Main.storyboard */; };
@@ -18,9 +19,10 @@
 		AD867C111ECE9CE1002C195A /* References.m in Sources */ = {isa = PBXBuildFile; fileRef = AD867C101ECE9CE1002C195A /* References.m */; };
 		AD867C141ECEA1CA002C195A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD867C131ECEA1CA002C195A /* AVFoundation.framework */; };
 		AD867C171ECEA329002C195A /* UIColor+BFPaperColors.m in Sources */ = {isa = PBXBuildFile; fileRef = AD867C161ECEA329002C195A /* UIColor+BFPaperColors.m */; };
-		AD867C1A1ECEAF90002C195A /* PostGroupsCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD867C191ECEAF90002C195A /* PostGroupsCollectionCell.m */; };
 		AD867C1E1ECEB2B7002C195A /* PostFriendsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD867C1C1ECEB2B7002C195A /* PostFriendsTableCell.m */; };
 		AD867C1F1ECEB2B7002C195A /* PostFriendsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD867C1D1ECEB2B7002C195A /* PostFriendsTableCell.xib */; };
+		AD9B04E11ED62A4900D03F7A /* InboxTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9B04DF1ED62A4900D03F7A /* InboxTableCell.m */; };
+		AD9B04E21ED62A4900D03F7A /* InboxTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD9B04E01ED62A4900D03F7A /* InboxTableCell.xib */; };
 		ADF29C561ECEB469004C4E17 /* friendObject.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF29C551ECEB469004C4E17 /* friendObject.m */; };
 		ADF29C591ECEBDF5004C4E17 /* groupObject.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF29C581ECEBDF5004C4E17 /* groupObject.m */; };
 		ADF29C5C1ECED687004C4E17 /* EditGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF29C5B1ECED687004C4E17 /* EditGroup.m */; };
@@ -47,6 +49,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AD48D08C1ED4C99300F22122 /* are you down.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "are you down.entitlements"; sourceTree = "<group>"; };
+		AD48D0911ED4CABF00F22122 /* siri.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = siri.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD48D09B1ED4CABF00F22122 /* siriUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = siriUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD48D09C1ED4CABF00F22122 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		AD48D0B31ED4CC4F00F22122 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		AD867BD31ECE9A28002C195A /* are you down.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "are you down.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD867BD71ECE9A28002C195A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AD867BD91ECE9A28002C195A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -68,11 +75,12 @@
 		AD867C131ECEA1CA002C195A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AD867C151ECEA329002C195A /* UIColor+BFPaperColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BFPaperColors.h"; sourceTree = "<group>"; };
 		AD867C161ECEA329002C195A /* UIColor+BFPaperColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFPaperColors.m"; sourceTree = "<group>"; };
-		AD867C181ECEAF90002C195A /* PostGroupsCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostGroupsCollectionCell.h; sourceTree = "<group>"; };
-		AD867C191ECEAF90002C195A /* PostGroupsCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostGroupsCollectionCell.m; sourceTree = "<group>"; };
 		AD867C1B1ECEB2B7002C195A /* PostFriendsTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostFriendsTableCell.h; sourceTree = "<group>"; };
 		AD867C1C1ECEB2B7002C195A /* PostFriendsTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostFriendsTableCell.m; sourceTree = "<group>"; };
 		AD867C1D1ECEB2B7002C195A /* PostFriendsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostFriendsTableCell.xib; sourceTree = "<group>"; };
+		AD9B04DE1ED62A4900D03F7A /* InboxTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InboxTableCell.h; sourceTree = "<group>"; };
+		AD9B04DF1ED62A4900D03F7A /* InboxTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxTableCell.m; sourceTree = "<group>"; };
+		AD9B04E01ED62A4900D03F7A /* InboxTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InboxTableCell.xib; sourceTree = "<group>"; };
 		ADF29C541ECEB469004C4E17 /* friendObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = friendObject.h; sourceTree = "<group>"; };
 		ADF29C551ECEB469004C4E17 /* friendObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = friendObject.m; sourceTree = "<group>"; };
 		ADF29C571ECEBDF5004C4E17 /* groupObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = groupObject.h; sourceTree = "<group>"; };
@@ -85,6 +93,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AD48D08E1ED4CABF00F22122 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD48D0981ED4CABF00F22122 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD48D09D1ED4CABF00F22122 /* IntentsUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AD867BD01ECE9A28002C195A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -127,6 +150,8 @@
 				AD867BD31ECE9A28002C195A /* are you down.app */,
 				AD867BEC1ECE9A28002C195A /* are you downTests.xctest */,
 				AD867BF71ECE9A28002C195A /* are you downUITests.xctest */,
+				AD48D0911ED4CABF00F22122 /* siri.appex */,
+				AD48D09B1ED4CABF00F22122 /* siriUI.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,6 +159,7 @@
 		AD867BD51ECE9A28002C195A /* are you down */ = {
 			isa = PBXGroup;
 			children = (
+				AD48D08C1ED4C99300F22122 /* are you down.entitlements */,
 				AD867BD91ECE9A28002C195A /* AppDelegate.h */,
 				AD867BDA1ECE9A28002C195A /* AppDelegate.m */,
 				AD867BDF1ECE9A28002C195A /* Main.storyboard */,
@@ -143,17 +169,13 @@
 				AD867BD61ECE9A28002C195A /* Supporting Files */,
 				AD867C0C1ECE9C63002C195A /* PostView.h */,
 				AD867C0D1ECE9C63002C195A /* PostView.m */,
-				AD867C181ECEAF90002C195A /* PostGroupsCollectionCell.h */,
-				AD867C191ECEAF90002C195A /* PostGroupsCollectionCell.m */,
-				AD867C1B1ECEB2B7002C195A /* PostFriendsTableCell.h */,
-				AD867C1C1ECEB2B7002C195A /* PostFriendsTableCell.m */,
-				AD867C1D1ECEB2B7002C195A /* PostFriendsTableCell.xib */,
 				ADF29C541ECEB469004C4E17 /* friendObject.h */,
 				ADF29C551ECEB469004C4E17 /* friendObject.m */,
 				ADF29C571ECEBDF5004C4E17 /* groupObject.h */,
 				ADF29C581ECEBDF5004C4E17 /* groupObject.m */,
 				ADF29C5A1ECED687004C4E17 /* EditGroup.h */,
 				ADF29C5B1ECED687004C4E17 /* EditGroup.m */,
+				AD9B04DD1ED62A2C00D03F7A /* TableCells */,
 			);
 			path = "are you down";
 			sourceTree = "<group>";
@@ -194,14 +216,63 @@
 		AD867C121ECEA1CA002C195A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD48D0B31ED4CC4F00F22122 /* Intents.framework */,
 				AD867C131ECEA1CA002C195A /* AVFoundation.framework */,
+				AD48D09C1ED4CABF00F22122 /* IntentsUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AD9B04DD1ED62A2C00D03F7A /* TableCells */ = {
+			isa = PBXGroup;
+			children = (
+				AD867C1B1ECEB2B7002C195A /* PostFriendsTableCell.h */,
+				AD867C1C1ECEB2B7002C195A /* PostFriendsTableCell.m */,
+				AD867C1D1ECEB2B7002C195A /* PostFriendsTableCell.xib */,
+				AD9B04DE1ED62A4900D03F7A /* InboxTableCell.h */,
+				AD9B04DF1ED62A4900D03F7A /* InboxTableCell.m */,
+				AD9B04E01ED62A4900D03F7A /* InboxTableCell.xib */,
+			);
+			name = TableCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AD48D0901ED4CABF00F22122 /* siri */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD48D0AF1ED4CABF00F22122 /* Build configuration list for PBXNativeTarget "siri" */;
+			buildPhases = (
+				AD48D08D1ED4CABF00F22122 /* Sources */,
+				AD48D08E1ED4CABF00F22122 /* Frameworks */,
+				AD48D08F1ED4CABF00F22122 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = siri;
+			productName = siri;
+			productReference = AD48D0911ED4CABF00F22122 /* siri.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		AD48D09A1ED4CABF00F22122 /* siriUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD48D0AC1ED4CABF00F22122 /* Build configuration list for PBXNativeTarget "siriUI" */;
+			buildPhases = (
+				AD48D0971ED4CABF00F22122 /* Sources */,
+				AD48D0981ED4CABF00F22122 /* Frameworks */,
+				AD48D0991ED4CABF00F22122 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = siriUI;
+			productName = siriUI;
+			productReference = AD48D09B1ED4CABF00F22122 /* siriUI.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		AD867BD21ECE9A28002C195A /* are you down */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AD867C001ECE9A28002C195A /* Build configuration list for PBXNativeTarget "are you down" */;
@@ -264,10 +335,25 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Robert Crosby";
 				TargetAttributes = {
+					AD48D0901ED4CABF00F22122 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = UD5W2M958Y;
+						ProvisioningStyle = Automatic;
+					};
+					AD48D09A1ED4CABF00F22122 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = UD5W2M958Y;
+						ProvisioningStyle = Automatic;
+					};
 					AD867BD21ECE9A28002C195A = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = UD5W2M958Y;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Siri = {
+								enabled = 1;
+							};
+						};
 					};
 					AD867BEB1ECE9A28002C195A = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -299,11 +385,27 @@
 				AD867BD21ECE9A28002C195A /* are you down */,
 				AD867BEB1ECE9A28002C195A /* are you downTests */,
 				AD867BF61ECE9A28002C195A /* are you downUITests */,
+				AD48D0901ED4CABF00F22122 /* siri */,
+				AD48D09A1ED4CABF00F22122 /* siriUI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AD48D08F1ED4CABF00F22122 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD48D0991ED4CABF00F22122 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AD867BD11ECE9A28002C195A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -311,6 +413,7 @@
 				ADF29C621ECF4BE8004C4E17 /* 0.jpg in Resources */,
 				AD867BE61ECE9A28002C195A /* LaunchScreen.storyboard in Resources */,
 				ADF29C641ECF4BE8004C4E17 /* 2.jpg in Resources */,
+				AD9B04E21ED62A4900D03F7A /* InboxTableCell.xib in Resources */,
 				AD867BE31ECE9A28002C195A /* Assets.xcassets in Resources */,
 				ADF29C631ECF4BE8004C4E17 /* 1.jpg in Resources */,
 				AD867C1F1ECEB2B7002C195A /* PostFriendsTableCell.xib in Resources */,
@@ -335,6 +438,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AD48D08D1ED4CABF00F22122 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD48D0971ED4CABF00F22122 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AD867BCF1ECE9A28002C195A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -344,10 +461,10 @@
 				AD867C111ECE9CE1002C195A /* References.m in Sources */,
 				AD867BD81ECE9A28002C195A /* main.m in Sources */,
 				AD867C0E1ECE9C63002C195A /* PostView.m in Sources */,
+				AD9B04E11ED62A4900D03F7A /* InboxTableCell.m in Sources */,
 				ADF29C5C1ECED687004C4E17 /* EditGroup.m in Sources */,
 				AD867C1E1ECEB2B7002C195A /* PostFriendsTableCell.m in Sources */,
 				AD867C171ECEA329002C195A /* UIColor+BFPaperColors.m in Sources */,
-				AD867C1A1ECEAF90002C195A /* PostGroupsCollectionCell.m in Sources */,
 				ADF29C591ECEBDF5004C4E17 /* groupObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +520,54 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AD48D0AD1ED4CABF00F22122 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = UD5W2M958Y;
+				INFOPLIST_FILE = siriUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.moop.are-you-down.siriUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AD48D0AE1ED4CABF00F22122 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = UD5W2M958Y;
+				INFOPLIST_FILE = siriUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.moop.are-you-down.siriUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AD48D0B01ED4CABF00F22122 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = UD5W2M958Y;
+				INFOPLIST_FILE = siri/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.moop.are-you-down.siri";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AD48D0B11ED4CABF00F22122 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = UD5W2M958Y;
+				INFOPLIST_FILE = siri/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.moop.are-you-down.siri";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		AD867BFE1ECE9A28002C195A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -497,6 +662,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "are you down/are you down.entitlements";
 				DEVELOPMENT_TEAM = UD5W2M958Y;
 				INFOPLIST_FILE = "are you down/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -509,6 +675,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "are you down/are you down.entitlements";
 				DEVELOPMENT_TEAM = UD5W2M958Y;
 				INFOPLIST_FILE = "are you down/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -570,6 +737,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AD48D0AC1ED4CABF00F22122 /* Build configuration list for PBXNativeTarget "siriUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD48D0AD1ED4CABF00F22122 /* Debug */,
+				AD48D0AE1ED4CABF00F22122 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD48D0AF1ED4CABF00F22122 /* Build configuration list for PBXNativeTarget "siri" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD48D0B01ED4CABF00F22122 /* Debug */,
+				AD48D0B11ED4CABF00F22122 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AD867BCE1ECE9A28002C195A /* Build configuration list for PBXProject "are you down" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

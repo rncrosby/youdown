@@ -14,7 +14,10 @@
 
 @implementation PostView
 
+
+
 - (void)viewDidLoad {
+    alertIsShowing = NO;
     groupSelected = @"";
     keepScrollingCreatePost = YES;
     keepScrollingInvite = YES;
@@ -29,25 +32,6 @@
                                                            selector:@selector(createPostTextAnimate)
                                                            userInfo:nil
                                                             repeats:YES];
-    // shadow on the cards
-    //[References cardshadow:createPostCard];
-    //[References cardshadow:inviteFriendsFriendsCard];
-    //[References cardshadow:inviteFriendsTitleCard];
-    /*
-    int image = arc4random() % 3;
-    [backgroundImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%i.jpg",image]]];
-    UILabel *blurBack = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [References screenWidth], [References screenHeight])];
-    [References blurView:blurBack];
-    blurBack.text = @"";
-    [self.view addSubview:blurBack];
-    [self.view sendSubviewToBack:blurBack];
-    [self.view sendSubviewToBack:backgroundImage];
-    [References blurView:createPostCard];
-    [References cornerRadius:createPostCard radius:12.0f];
-    [References blurView:inviteFriendsFriendsCard];
-    [References cornerRadius:inviteFriendsFriendsCard radius:12.0f];
-     */
-    // temporary friend array
     friends = [[NSMutableArray alloc] initWithCapacity:4];
     friendNames = [[NSMutableArray alloc] initWithObjects:@"person1",@"person2",@"person3",@"person4", nil];
     groups = [[NSMutableArray alloc] initWithCapacity:3];
@@ -55,21 +39,47 @@
         friendObject *object = [friendObject FriendWithName:friendNames[a] andFact:@"usually runs with you"];
         if (a < 3) {
             NSMutableArray *temp;
+            groupObject *gObject;
             if (a == 0) {
                 temp = [[NSMutableArray alloc] initWithObjects:@"person1",@"person2",@"person3",@"person4", nil];
+                gObject = [groupObject GroupWithName:@"running" andMembers:temp];
             } else if (a == 1) {
                 temp = [[NSMutableArray alloc] initWithObjects:@"person3",@"person4", nil];
+                gObject = [groupObject GroupWithName:@"studying" andMembers:temp];
             } else if (a == 2) {
                 temp = [[NSMutableArray alloc] initWithObjects:@"person1",@"person2", nil];
+                gObject = [groupObject GroupWithName:@"basketball" andMembers:temp];
             }
-            groupObject *gObject = [groupObject GroupWithName:@"study" andMembers:temp];
+            
             [groups addObject:gObject];
         }
         [friends addObject:object];
     }
     [References cornerRadius:createPostCard radius:10.0f];
     [References cornerRadius:inviteFriendsTitleCard radius:10.0f];
+    AVCaptureSession *session = [[AVCaptureSession alloc] init];
+    session.sessionPreset = AVCaptureSessionPresetHigh;
+    
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    NSError *error = nil;
+    AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+    [session addInput:input];
+    
+    AVCaptureVideoPreviewLayer *newCaptureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
+    newCaptureVideoPreviewLayer.frame = self.view.bounds;
+    UIView *blurView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [References screenWidth], [References screenHeight])];
+    [References blurView:blurView];
+    [self.view insertSubview:blurView atIndex:0];
+        [self.view.layer insertSublayer:newCaptureVideoPreviewLayer atIndex:0];
+    [session startRunning];
     [super viewDidLoad];
+    createPostScroll.contentSize = CGSizeMake([References screenWidth]*2, [References screenHeight]);
+    createPostScroll.frame = CGRectMake(0, 0, [References screenWidth], [References screenHeight]);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [inviteFriendsTable reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,7 +88,7 @@
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)createPostTextAnimate {
@@ -108,46 +118,60 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (keepScrollingCreatePost == YES) {
-        if(createPostScroll.contentOffset.y > 120) {
-            keepScrollingCreatePost = NO;
-            keepScrollingInvite = YES;
-            [References moveUp:createPostScroll yChange:[References screenHeight]];
-            [References moveUp:inviteFriendsScroll yChange:[References screenHeight]];
-            inviteFriendsActivity.text = createPostText.text;
+        if(createPostScroll.contentOffset.y < -100) {
+            //keepScrollingCreatePost = NO;
+            //keepScrollingInvite = YES;
+            //[References moveUp:createPostScroll yChange:[References screenHeight]];
+            //[References moveUp:inviteFriendsScroll yChange:[References screenHeight]];
+            //inviteFriendsActivity.text = createPostText.text;
             return ;
         }
 
-    }
-    if (keepScrollingInvite == YES) {
-        if(inviteFriendsScroll.contentOffset.y < -120) {
-            keepScrollingCreatePost = YES;
-            keepScrollingInvite = NO;
-            [References moveDown:createPostScroll yChange:[References screenHeight]];
-            [References moveDown:inviteFriendsScroll yChange:[References screenHeight]];
-            return ;
-        }
-        
     }
 
 
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    if (section == 0) {
-        return groups.count;
+    if (tableView.tag == 25) {
+        inboxscrollview.contentSize = CGSizeMake([References screenWidth], 107 + (20*129));
+        inboxtable.frame = CGRectMake(inboxtable.frame.origin.x, inboxtable.frame.origin.y, inboxtable.frame.size.width, 20*129);
+        return 20;
     } else {
-    return [friends count];
+        if (section == 0) {
+            return groups.count;
+        } else {
+            return [friends count];
+        }
+
     }
-}
+    }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    if (tableView.tag == 25) {
+        return 1;
+    } else {
+            return 2;
+    }
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView.tag == 25 ) {
+        static NSString *simpleTableIdentifier = @"InboxTableCell";
+        
+        InboxTableCell *cell = (InboxTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InboxTableCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        [References cornerRadius:cell.card radius:10.0f];
+        cell.backgroundColor = [UIColor clearColor];
+            return cell;
+    } else {
     static NSString *simpleTableIdentifier = @"PostFriendsTableCell";
     
     PostFriendsTableCell *cell = (PostFriendsTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -176,6 +200,7 @@
             members = [members stringByAppendingString:[NSString stringWithFormat:@"%@, ",memberArray[a]]];
             }
         }
+        cell.groupMembers = object;
         cell.fact.text = members;
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
         [cell addGestureRecognizer:longPress];
@@ -193,30 +218,52 @@
             cell.isSelected.alpha = 0.1;
         }
     }
-
-
     return cell;
+    }
 }
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)tapGesture {
-    NSLog(@"tapGesture:");
-    //    CGRect targetRectangle = self.tapView.frame;
-    CGRect targetRectangle = CGRectMake(100, 100, 100, 100);
-    [[UIMenuController sharedMenuController] setTargetRect:targetRectangle
-                                                    inView:self.view];
-    
-    UIMenuItem *menuItem = [[UIMenuItem alloc] initWithTitle:@"Custom Action"
-                                                      action:@selector(customAction:)];
-    
-    [[UIMenuController sharedMenuController]
-     setMenuItems:@[menuItem]];
-    [[UIMenuController sharedMenuController]
-     setMenuVisible:YES animated:YES];
+    if (alertIsShowing == NO) {
+        PostFriendsTableCell *cell = (PostFriendsTableCell*)tapGesture.view;
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:cell.name.text message:@"from here you can edit or delete this group" preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            alertIsShowing = NO;
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+        }]];
+        
+        [actionSheet addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Delete %@",cell.name.text] style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            alertIsShowing = NO;
+            // Distructive button tapped.
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+        }]];
+        
+        [actionSheet addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Modify %@",cell.name.text] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            // OK button tapped.
+            alertIsShowing = NO;
+            EditGroup *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EditGroup"];
+            viewController.friendList = friends;
+            viewController.group = cell.groupMembers;
+            viewController.groupName = cell.name.text;
+            [self presentViewController:viewController animated:YES completion:nil];
+        }]];
+        // Present action sheet.
+        [self presentViewController:actionSheet animated:YES completion:nil];
+        alertIsShowing = YES;
+    }
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
+        UINotificationFeedbackGenerator *newGenerator = [[UINotificationFeedbackGenerator alloc] init];
+        [newGenerator prepare];
+        [newGenerator notificationOccurred:UINotificationFeedbackTypeSuccess];
         groupObject *group = groups[indexPath.row];
         if ([group valueForKey:@"selected"] == [NSNumber numberWithBool:0]) {
             [group setValue:[NSNumber numberWithBool:YES] forKey:@"selected"];
@@ -238,15 +285,19 @@
         }
         [inviteFriendsTable reloadData];
     } else {
+        UISelectionFeedbackGenerator *newGenerator = [[UISelectionFeedbackGenerator alloc] init];
+        [newGenerator prepare];
     PostFriendsTableCell *cell = (PostFriendsTableCell *)[tableView cellForRowAtIndexPath:indexPath];
     friendObject *object = friends[indexPath.row];
         
     if ([object valueForKey:@"selected"] == [NSNumber numberWithBool:0]) {
         [object setValue:[NSNumber numberWithBool:YES] forKey:@"selected"];
         cell.isSelected.alpha = 0.7;
+        [newGenerator selectionChanged];
     } else {
         [object setValue:[NSNumber numberWithBool:NO] forKey:@"selected"];
         cell.isSelected.alpha = 0.1;
+        [newGenerator selectionChanged];
     }
     }
 }
@@ -258,7 +309,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 65;
+    if (tableView.tag == 25) {
+        return 129;
+    } else {
+            return 65;
+    }
 }
 
 

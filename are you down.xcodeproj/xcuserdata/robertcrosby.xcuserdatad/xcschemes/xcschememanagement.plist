@@ -9,9 +9,29 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>siri.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>siriUI.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>AD48D0901ED4CABF00F22122</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AD48D09A1ED4CABF00F22122</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>AD867BD21ECE9A28002C195A</key>
 		<dict>
 			<key>primary</key>

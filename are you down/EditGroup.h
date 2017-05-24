@@ -9,14 +9,23 @@
 #import <UIKit/UIKit.h>
 #import "groupObject.h"
 #import "References.h"
+#import "PostFriendsTableCell.h"
+#import "friendObject.h"
+#import "groupObject.h"
+#import "PostView.h"
 
-@interface EditGroup : UIViewController <UITableViewDelegate,UITableViewDataSource> {
-    NSString* groupName;
-    NSMutableArray* groupMembers;
+@interface EditGroup : UIViewController <UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource> {
     __weak IBOutlet UITableView *friendTable;
+    NSMutableArray *groupMembers;
+    NSString *oldName;
+    bool anyGroupMembers;
 }
 
-@property (strong, nonatomic) NSString *user;
-@property (strong, nonatomic) NSMutableArray *groupMembers;
+@property (nonatomic) NSString *groupName;
+@property (nonatomic) NSMutableArray *friendList;
+@property (nonatomic) groupObject *group;
+- (IBAction)close:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *groupNameField;
+
 
 @end
