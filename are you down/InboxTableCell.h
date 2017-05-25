@@ -16,5 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *no;
 @property (weak, nonatomic) IBOutlet UIButton *yeah;
 @property (weak, nonatomic) IBOutlet UIButton *more;
+@property (weak, nonatomic) IBOutlet UILabel *secondCard;
+@property (weak, nonatomic) IBOutlet UIScrollView *scroll;
 
 @end

@@ -74,8 +74,9 @@
         [self.view.layer insertSublayer:newCaptureVideoPreviewLayer atIndex:0];
     [session startRunning];
     [super viewDidLoad];
-    createPostScroll.contentSize = CGSizeMake([References screenWidth]*2, [References screenHeight]);
+    createPostScroll.contentSize = CGSizeMake([References screenWidth]*3, [References screenHeight]);
     createPostScroll.frame = CGRectMake(0, 0, [References screenWidth], [References screenHeight]);
+    createPostScroll.contentOffset = CGPointMake([References screenWidth], 0);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -133,10 +134,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (tableView.tag == 25) {
-        inboxscrollview.contentSize = CGSizeMake([References screenWidth], 107 + (20*129));
-        inboxtable.frame = CGRectMake(inboxtable.frame.origin.x, inboxtable.frame.origin.y, inboxtable.frame.size.width, 20*129);
-        return 20;
+    if (tableView.tag == 50) {
+        return 3;
+    } else if (tableView.tag == 25) {
+        inboxscrollview.contentSize = CGSizeMake([References screenWidth], 107 + (5*124)+5);
+        inboxtable.frame = CGRectMake(inboxtable.frame.origin.x, inboxtable.frame.origin.y, inboxtable.frame.size.width, 5*124);
+        return 5;
     } else {
         if (section == 0) {
             return groups.count;
@@ -148,7 +151,9 @@
     }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (tableView.tag == 25) {
+    if (tableView.tag == 50) {
+        return 1;
+    } else if (tableView.tag == 25) {
         return 1;
     } else {
             return 2;
@@ -159,7 +164,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 25 ) {
+    if (tableView.tag == 50) {
+        static NSString *simpleTableIdentifier = @"UpcomingTableCell";
+        
+        UpcomingTableCell *cell = (UpcomingTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"UpcomingTableCell" owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        [References cornerRadius:cell.card radius:10.0f];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.activityName.text = @"ball out";
+        return cell;
+
+    } else if (tableView.tag == 25 ) {
         static NSString *simpleTableIdentifier = @"InboxTableCell";
         
         InboxTableCell *cell = (InboxTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -169,6 +188,8 @@
             cell = [nib objectAtIndex:0];
         }
         [References cornerRadius:cell.card radius:10.0f];
+        [References cornerRadius:cell.yeah radius:10.0f];
+        [References cornerRadius:cell.no radius:10.0f];
         cell.backgroundColor = [UIColor clearColor];
             return cell;
     } else {
@@ -309,8 +330,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 25) {
-        return 129;
+    if (tableView.tag == 50) {
+        return 559;
+    }
+    else if (tableView.tag == 25) {
+        return 124;
     } else {
             return 65;
     }

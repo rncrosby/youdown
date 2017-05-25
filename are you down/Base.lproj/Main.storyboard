@@ -18,11 +18,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="750" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1125" height="1334"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mW-Cb-X6S">
-                                <rect key="frame" x="0.0" y="0.0" width="750" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1125" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="pull to send" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q98-jt-F68">
@@ -58,7 +58,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3dp-WV-5nP">
                                         <rect key="frame" x="8" y="135" width="359" height="495"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -89,7 +89,7 @@
                                         </state>
                                     </button>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccZ-py-yIs">
-                                        <rect key="frame" x="375" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="750" y="0.0" width="375" height="667"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Inbox" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdb-bm-Iq8">
@@ -110,6 +110,22 @@
                                             </tableView>
                                         </subviews>
                                     </scrollView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upcoming" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7se-mE-al9">
+                                        <rect key="frame" x="383" y="43" width="359" height="57"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" tag="50" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8c6-vF-FBg">
+                                        <rect key="frame" x="383" y="108" width="359" height="559"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="39a-BH-SxU"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="EJF-sC-Tbd"/>
+                                        </connections>
+                                    </tableView>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="YO7-m6-Iqc"/>
@@ -119,7 +135,7 @@
                         <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="750" height="667"/>
+                    <size key="freeformSize" width="1125" height="1334"/>
                     <connections>
                         <outlet property="createPostInfo" destination="RL0-va-Sly" id="kAg-qh-2bc"/>
                         <outlet property="createPostScroll" destination="9mW-Cb-X6S" id="bsE-Da-CAk"/>
@@ -128,11 +144,12 @@
                         <outlet property="inboxtable" destination="GuY-pZ-GDy" id="bKd-WI-fkq"/>
                         <outlet property="inviteFriendsTable" destination="Woe-TH-8xA" id="qKr-ao-y7s"/>
                         <outlet property="inviteFriendsTitleCard" destination="3dp-WV-5nP" id="W5O-kj-q9X"/>
+                        <outlet property="upcomingtable" destination="8c6-vF-FBg" id="OBO-Gv-zIO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="188.80000000000001" y="-167.76611694152925"/>
+            <point key="canvasLocation" x="188" y="-168.21589205397302"/>
         </scene>
         <!--Edit Group-->
         <scene sceneID="23I-A4-LNN">

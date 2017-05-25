@@ -15,6 +15,7 @@
 #import "groupObject.h"
 #import "EditGroup.h"
 #import "InboxTableCell.h"
+#import "UpcomingTableCell.h"
 
 @interface PostView : UIViewController <UITextFieldDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource> {
     bool alertIsShowing;
@@ -47,9 +48,12 @@
     
     
     // inbox shit
-    
     __weak IBOutlet UITableView *inboxtable;
     __weak IBOutlet UIScrollView *inboxscrollview;
+    
+    // upcoming
+
+    __weak IBOutlet UITableView *upcomingtable;
 }
 
 @property (nonatomic) NSString *groupNameNew;
