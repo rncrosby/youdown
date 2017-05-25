@@ -146,7 +146,7 @@
 +(void)fadeIn:(UIView *)view{
     view.hidden = NO;
     view.alpha = 0;
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         view.alpha = 1;
     }];
 }

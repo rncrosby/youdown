@@ -10,7 +10,6 @@
 		AD48D09D1ED4CABF00F22122 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD48D09C1ED4CABF00F22122 /* IntentsUI.framework */; };
 		AD5B5A1F1ED7645F00A06FC1 /* UpcomingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5B5A1D1ED7645F00A06FC1 /* UpcomingTableCell.m */; };
 		AD5B5A201ED7645F00A06FC1 /* UpcomingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD5B5A1E1ED7645F00A06FC1 /* UpcomingTableCell.xib */; };
-		AD5B5A231ED76F4100A06FC1 /* UpcomingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5B5A221ED76F4100A06FC1 /* UpcomingCollectionViewCell.m */; };
 		AD867BD81ECE9A28002C195A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD867BD71ECE9A28002C195A /* main.m */; };
 		AD867BDB1ECE9A28002C195A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD867BDA1ECE9A28002C195A /* AppDelegate.m */; };
 		AD867BE11ECE9A28002C195A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD867BDF1ECE9A28002C195A /* Main.storyboard */; };
@@ -60,8 +59,6 @@
 		AD5B5A1C1ED7645F00A06FC1 /* UpcomingTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpcomingTableCell.h; sourceTree = "<group>"; };
 		AD5B5A1D1ED7645F00A06FC1 /* UpcomingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpcomingTableCell.m; sourceTree = "<group>"; };
 		AD5B5A1E1ED7645F00A06FC1 /* UpcomingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpcomingTableCell.xib; sourceTree = "<group>"; };
-		AD5B5A211ED76F4100A06FC1 /* UpcomingCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpcomingCollectionViewCell.h; sourceTree = "<group>"; };
-		AD5B5A221ED76F4100A06FC1 /* UpcomingCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpcomingCollectionViewCell.m; sourceTree = "<group>"; };
 		AD867BD31ECE9A28002C195A /* are you down.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "are you down.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD867BD71ECE9A28002C195A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AD867BD91ECE9A28002C195A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -243,8 +240,6 @@
 				AD5B5A1C1ED7645F00A06FC1 /* UpcomingTableCell.h */,
 				AD5B5A1D1ED7645F00A06FC1 /* UpcomingTableCell.m */,
 				AD5B5A1E1ED7645F00A06FC1 /* UpcomingTableCell.xib */,
-				AD5B5A211ED76F4100A06FC1 /* UpcomingCollectionViewCell.h */,
-				AD5B5A221ED76F4100A06FC1 /* UpcomingCollectionViewCell.m */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -478,7 +473,6 @@
 				AD867C0E1ECE9C63002C195A /* PostView.m in Sources */,
 				AD9B04E11ED62A4900D03F7A /* InboxTableCell.m in Sources */,
 				ADF29C5C1ECED687004C4E17 /* EditGroup.m in Sources */,
-				AD5B5A231ED76F4100A06FC1 /* UpcomingCollectionViewCell.m in Sources */,
 				AD867C1E1ECEB2B7002C195A /* PostFriendsTableCell.m in Sources */,
 				AD867C171ECEA329002C195A /* UIColor+BFPaperColors.m in Sources */,
 				ADF29C591ECEBDF5004C4E17 /* groupObject.m in Sources */,

@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="359" height="559"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="359" height="558.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="359" height="559"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXz-V8-h9H">
@@ -40,11 +40,16 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aio-V8-ggx">
+                        <rect key="frame" x="8" y="68" width="343" height="483"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </scrollView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="activityName" destination="OYo-ag-MEh" id="ftE-uf-hKg"/>
                 <outlet property="card" destination="EXz-V8-h9H" id="JDQ-mS-LXe"/>
+                <outlet property="chatView" destination="aio-V8-ggx" id="PdX-6g-pZB"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </tableViewCell>
