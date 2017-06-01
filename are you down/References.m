@@ -77,19 +77,19 @@
         view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y-[self screenHeight], view.frame.size.width, view.frame.size.height);
     }
     view.hidden = NO;
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         view.frame = location;
     }];
 }
 
 +(void)fromonscreen:(UIView *)view where:(NSString *)where{
     if ([where isEqualToString:@"BOTTOM"]) {
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y+[self screenHeight], view.frame.size.width, view.frame.size.height);
         }];
             }
     if ([where isEqualToString:@"TOP"]) {
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y-[self screenHeight], view.frame.size.width, view.frame.size.height);
             
         }];
@@ -99,12 +99,12 @@
 
 +(void)justMoveOffScreen:(UIView *)view where:(NSString *)where{
     if ([where isEqualToString:@"BOTTOM"]) {
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
         view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y+[self screenHeight], view.frame.size.width, view.frame.size.height);
             }];
     }
     if ([where isEqualToString:@"TOP"]) {
-         [UIView animateWithDuration:1 animations:^{
+         [UIView animateWithDuration:0.5 animations:^{
         view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y-[self screenHeight], view.frame.size.width, view.frame.size.height);
          }];
     }
@@ -113,13 +113,13 @@
 +(void)justMoveOnScreen:(UIView *)view where:(NSString *)where{
     if ([where isEqualToString:@"BOTTOM"]) {
         view.hidden = NO;
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y-[self screenHeight], view.frame.size.width, view.frame.size.height);
         }];
     }
     if ([where isEqualToString:@"TOP"]) {
         view.hidden = NO;
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y+[self screenHeight], view.frame.size.width, view.frame.size.height);
         }];
     }
@@ -128,7 +128,7 @@
 }
 
 +(void)fadeThenMove:(UIView *)view where:(NSString *)where{
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         view.alpha = 0;
     } completion:^(BOOL finished) {
         view.hidden = YES;
@@ -157,9 +157,15 @@
     }];
 }
 
-+(void)shift:(UIView*)view X:(float)X Y:(float)Y W:(float)W H:(float)H;{
-    [UIView animateWithDuration:1 animations:^{
++(void)shift:(UIView*)view X:(float)X Y:(float)Y W:(float)W H:(float)H{
+    [UIView animateWithDuration:0.5 animations:^{
         view.frame = CGRectMake(X, Y, W, H);
+    }];
+}
+
++(void)adjustHeight:(UIView*)view H:(float)H{
+    [UIView animateWithDuration:0.5 animations:^{
+        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y , view.frame.size.width, view.frame.size.height+H);
     }];
 }
 
@@ -235,6 +241,12 @@
     } completion:NULL];
 }
 
++(void)fadeButtonText:(UIButton*)view text:(NSString*)text{
+    [UIView animateWithDuration:0.5 animations:^{
+        [view setTitle:text forState:UIControlStateNormal];
+    } completion:NULL];
+}
+
 +(void)fadeButtonColor:(UIButton*)view color:(UIColor*)color{
     [UIView animateWithDuration:0.5 animations:^{
         [view setBackgroundColor:color];
@@ -248,12 +260,24 @@
 }
 
 +(NSString *) randomStringWithLength: (int) len {
-    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyz";
     
     NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
     
     for (int i=0; i<len; i++) {
-        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform((int)[letters length])]];
+    }
+    
+    return randomString;
+}
+
++(NSString *) randomIntWithLength: (int) len {
+    NSString *letters = @"0123456789";
+    
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform((int)[letters length])]];
     }
     
     return randomString;
@@ -329,5 +353,19 @@
     [scanner scanHexInt:&hexInt];
     
     return hexInt;
+}
+
++(void)toastMessage:(NSString *)message andView:(UIViewController *)view {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    [view presentViewController:alert animated:YES completion:nil];
+    
+    int duration = 3; // duration in seconds
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, duration * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 @end

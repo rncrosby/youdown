@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD04E4291EDCD5BF0087BD07 /* SlimActivityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AD04E4281EDCD5BF0087BD07 /* SlimActivityObject.m */; };
+		AD04E42C1EDE1F4F0087BD07 /* StartView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD04E42B1EDE1F4F0087BD07 /* StartView.m */; };
+		AD04E4301EDE21070087BD07 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD04E42F1EDE21070087BD07 /* Contacts.framework */; };
 		AD48D09D1ED4CABF00F22122 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD48D09C1ED4CABF00F22122 /* IntentsUI.framework */; };
 		AD5B5A1F1ED7645F00A06FC1 /* UpcomingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5B5A1D1ED7645F00A06FC1 /* UpcomingTableCell.m */; };
 		AD5B5A201ED7645F00A06FC1 /* UpcomingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD5B5A1E1ED7645F00A06FC1 /* UpcomingTableCell.xib */; };
+		AD5B5A261ED7827D00A06FC1 /* ActivityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5B5A251ED7827D00A06FC1 /* ActivityObject.m */; };
+		AD5B5A2A1ED79C2400A06FC1 /* MessageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5B5A291ED79C2400A06FC1 /* MessageObject.m */; };
 		AD867BD81ECE9A28002C195A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD867BD71ECE9A28002C195A /* main.m */; };
 		AD867BDB1ECE9A28002C195A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD867BDA1ECE9A28002C195A /* AppDelegate.m */; };
 		AD867BE11ECE9A28002C195A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD867BDF1ECE9A28002C195A /* Main.storyboard */; };
@@ -51,6 +56,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AD04E4271EDCD5BF0087BD07 /* SlimActivityObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlimActivityObject.h; sourceTree = "<group>"; };
+		AD04E4281EDCD5BF0087BD07 /* SlimActivityObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlimActivityObject.m; sourceTree = "<group>"; };
+		AD04E42A1EDE1F4F0087BD07 /* StartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartView.h; sourceTree = "<group>"; };
+		AD04E42B1EDE1F4F0087BD07 /* StartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartView.m; sourceTree = "<group>"; };
+		AD04E42D1EDE20140087BD07 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		AD04E42F1EDE21070087BD07 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		AD48D08C1ED4C99300F22122 /* are you down.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "are you down.entitlements"; sourceTree = "<group>"; };
 		AD48D0911ED4CABF00F22122 /* siri.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = siri.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD48D09B1ED4CABF00F22122 /* siriUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = siriUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +70,10 @@
 		AD5B5A1C1ED7645F00A06FC1 /* UpcomingTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpcomingTableCell.h; sourceTree = "<group>"; };
 		AD5B5A1D1ED7645F00A06FC1 /* UpcomingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpcomingTableCell.m; sourceTree = "<group>"; };
 		AD5B5A1E1ED7645F00A06FC1 /* UpcomingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpcomingTableCell.xib; sourceTree = "<group>"; };
+		AD5B5A241ED7827D00A06FC1 /* ActivityObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityObject.h; sourceTree = "<group>"; };
+		AD5B5A251ED7827D00A06FC1 /* ActivityObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityObject.m; sourceTree = "<group>"; };
+		AD5B5A281ED79C2400A06FC1 /* MessageObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageObject.h; sourceTree = "<group>"; };
+		AD5B5A291ED79C2400A06FC1 /* MessageObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageObject.m; sourceTree = "<group>"; };
 		AD867BD31ECE9A28002C195A /* are you down.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "are you down.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD867BD71ECE9A28002C195A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AD867BD91ECE9A28002C195A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -117,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD04E4301EDE21070087BD07 /* Contacts.framework in Frameworks */,
 				AD867C141ECEA1CA002C195A /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +154,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD5B5A271ED7829500A06FC1 /* Custom Objects */ = {
+			isa = PBXGroup;
+			children = (
+				AD5B5A241ED7827D00A06FC1 /* ActivityObject.h */,
+				AD5B5A251ED7827D00A06FC1 /* ActivityObject.m */,
+				ADF29C541ECEB469004C4E17 /* friendObject.h */,
+				ADF29C551ECEB469004C4E17 /* friendObject.m */,
+				ADF29C571ECEBDF5004C4E17 /* groupObject.h */,
+				ADF29C581ECEBDF5004C4E17 /* groupObject.m */,
+				AD5B5A281ED79C2400A06FC1 /* MessageObject.h */,
+				AD5B5A291ED79C2400A06FC1 /* MessageObject.m */,
+				AD04E4271EDCD5BF0087BD07 /* SlimActivityObject.h */,
+				AD04E4281EDCD5BF0087BD07 /* SlimActivityObject.m */,
+			);
+			name = "Custom Objects";
+			sourceTree = "<group>";
+		};
 		AD867BCA1ECE9A28002C195A = {
 			isa = PBXGroup;
 			children = (
@@ -171,16 +204,15 @@
 				AD867BE21ECE9A28002C195A /* Assets.xcassets */,
 				AD867BE41ECE9A28002C195A /* LaunchScreen.storyboard */,
 				AD867BE71ECE9A28002C195A /* Info.plist */,
-				AD867BD61ECE9A28002C195A /* Supporting Files */,
 				AD867C0C1ECE9C63002C195A /* PostView.h */,
 				AD867C0D1ECE9C63002C195A /* PostView.m */,
-				ADF29C541ECEB469004C4E17 /* friendObject.h */,
-				ADF29C551ECEB469004C4E17 /* friendObject.m */,
-				ADF29C571ECEBDF5004C4E17 /* groupObject.h */,
-				ADF29C581ECEBDF5004C4E17 /* groupObject.m */,
 				ADF29C5A1ECED687004C4E17 /* EditGroup.h */,
 				ADF29C5B1ECED687004C4E17 /* EditGroup.m */,
+				AD867BD61ECE9A28002C195A /* Supporting Files */,
 				AD9B04DD1ED62A2C00D03F7A /* TableCells */,
+				AD5B5A271ED7829500A06FC1 /* Custom Objects */,
+				AD04E42A1EDE1F4F0087BD07 /* StartView.h */,
+				AD04E42B1EDE1F4F0087BD07 /* StartView.m */,
 			);
 			path = "are you down";
 			sourceTree = "<group>";
@@ -221,6 +253,8 @@
 		AD867C121ECEA1CA002C195A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD04E42F1EDE21070087BD07 /* Contacts.framework */,
+				AD04E42D1EDE20140087BD07 /* AddressBook.framework */,
 				AD48D0B31ED4CC4F00F22122 /* Intents.framework */,
 				AD867C131ECEA1CA002C195A /* AVFoundation.framework */,
 				AD48D09C1ED4CABF00F22122 /* IntentsUI.framework */,
@@ -469,13 +503,17 @@
 				AD867BDB1ECE9A28002C195A /* AppDelegate.m in Sources */,
 				AD867C111ECE9CE1002C195A /* References.m in Sources */,
 				AD867BD81ECE9A28002C195A /* main.m in Sources */,
+				AD04E42C1EDE1F4F0087BD07 /* StartView.m in Sources */,
+				AD04E4291EDCD5BF0087BD07 /* SlimActivityObject.m in Sources */,
 				AD5B5A1F1ED7645F00A06FC1 /* UpcomingTableCell.m in Sources */,
+				AD5B5A2A1ED79C2400A06FC1 /* MessageObject.m in Sources */,
 				AD867C0E1ECE9C63002C195A /* PostView.m in Sources */,
 				AD9B04E11ED62A4900D03F7A /* InboxTableCell.m in Sources */,
 				ADF29C5C1ECED687004C4E17 /* EditGroup.m in Sources */,
 				AD867C1E1ECEB2B7002C195A /* PostFriendsTableCell.m in Sources */,
 				AD867C171ECEA329002C195A /* UIColor+BFPaperColors.m in Sources */,
 				ADF29C591ECEBDF5004C4E17 /* groupObject.m in Sources */,
+				AD5B5A261ED7827D00A06FC1 /* ActivityObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

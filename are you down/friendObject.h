@@ -10,11 +10,10 @@
 
 @interface friendObject : NSObject
 
-+(instancetype)FriendWithName:(NSString*)name andFact:(NSString*)fact;
++(instancetype)FriendWithName:(NSString*)name andPhone:(NSString*)phone;
 
 @property (nonatomic, strong) NSString *name;
-
-@property (nonatomic, strong) NSString *fact;
+@property (nonatomic,strong) NSString *phone;
 @property (nonatomic, strong) NSNumber *selected;
 
 @end

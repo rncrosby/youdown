@@ -9,17 +9,11 @@
 #import "UpcomingTableCell.h"
 
 @implementation UpcomingTableCell
+@synthesize activity;
 
 - (void)awakeFromNib {
-    NSLog(@"hey");
     [super awakeFromNib];
     // Initialization code
-    numberOfMessages = 0;
-    currentMessagePosition = 0;
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardDidShowNotification object:nil];
-    _chatView.contentSize = CGSizeMake(_chatView.frame.size.width, _chatView.frame.size.height);
-    [self createMessage:YES withText:@"hey"];
 }
 
 -(void)keyboardOnScreen:(NSNotification *)notification
@@ -28,9 +22,8 @@
     NSValue      *value = info[UIKeyboardFrameEndUserInfoKey];
     
     CGRect rawFrame      = [value CGRectValue];
-    CGRect keyboardFrame = [self.superview convertRect:rawFrame fromView:nil];
-    //keyboardHeight = keyboardFrame;
-    //[References moveUp:messageBar yChange:keyboardHeight.size.height];
+    keyboardHeight = [self.superview convertRect:rawFrame fromView:nil];
+    [References shift:_chatView X:_chatView.frame.origin.x Y:_chatView.frame.origin.y W:_chatView.frame.size.width H:_chatView.frame.size.height-keyboardHeight.size.height];
 }
 
 -(void)createMessage:(BOOL)amSender withText:(NSString*)message{
@@ -70,7 +63,7 @@
     [References cornerRadius:messageBubble radius:5.0f];
     [messageBubble setFont:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]]];
     [messageBubble setTextColor:textColor];
-    messageBubble.alpha = 0;
+    messageBubble.alpha = 1;
     NSMutableParagraphStyle *style =  [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     if (amSender == YES) {
         style.alignment = NSTextAlignmentRight;
@@ -87,7 +80,6 @@
     messageBubble.attributedText = attrText;
     [_chatView addSubview:messageBubble];
     [self bringSubviewToFront:_chatView];
-    [References fadeIn:messageBubble];
     currentMessagePosition = currentMessagePosition + 5 + messageBubble.frame.size.height;
     numberOfMessages++;
     if (_chatView.contentSize.height < currentMessagePosition) {
@@ -99,6 +91,13 @@
         
         [self createMessage:NO withText:[self messageResponder:message]];
     }
+}
+
+-(bool) textFieldShouldReturn:(UITextField *)textField {
+    [self createMessage:YES withText:textField.text];
+    [References shift:_chatView X:_chatView.frame.origin.x Y:_chatView.frame.origin.y W:_chatView.frame.size.width H:_chatView.frame.size.height+keyboardHeight.size.height];
+    [textField resignFirstResponder];
+    return YES;
 }
 
 -(NSString*)messageResponder:(NSString*)message{

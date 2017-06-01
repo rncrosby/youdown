@@ -16,6 +16,16 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"phone"]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"PostView"];
+        
+        self.window.rootViewController = viewController;
+        [self.window makeKeyAndVisible];
+    }
+    
     // Override point for customization after application launch.
     return YES;
 }
@@ -46,6 +56,5 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
 
 @end

@@ -31,6 +31,7 @@
 +(void)fadeIn:(UIView*)view;
 +(void)fadeOut:(UIView*)view;
 +(void)shift:(UIView*)view X:(float)X Y:(float)Y W:(float)W H:(float)H;
++(void)adjustHeight:(UIView*)view H:(float)H;
 +(void)moveUp:(UIView*)view yChange:(float)yChange;
 +(void)moveDown:(UIView*)view yChange:(float)yChange;
 +(void)moveBackDown:(UIView*)view frame:(CGRect)frame;
@@ -44,6 +45,9 @@
 +(void)fadeLabelText:(UILabel*)view newText:(NSString*)newText;
 +(void)moveHorizontal:(UIView*)view where:(NSString*)where;
 +(NSString *) randomStringWithLength: (int) len;
++(NSString *) randomIntWithLength: (int) len;
 +(UIView*)createGradient:(UIColor*)colorA andColor:(UIColor*)colorB withFrame:(CGRect)frame;
 +(UIColor *)getUIColorObjectFromHexString:(NSString *)hexStr alpha:(CGFloat)alpha;
++(void)fadeButtonText:(UIButton*)view text:(NSString*)text;
++(void)toastMessage:(NSString*)message andView:(UIViewController*)view;
 @end

@@ -16,9 +16,14 @@
 #import "EditGroup.h"
 #import "InboxTableCell.h"
 #import "UpcomingTableCell.h"
+#import "ActivityObject.h"
+#import "MessageObject.h"
+#import "SlimActivityObject.h"
 
 @interface PostView : UIViewController <UITextFieldDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource> {
     bool alertIsShowing;
+    CGRect keyboardHeight;
+    int currentmessagePosition;
     NSString *groupSelected;
     __weak IBOutlet UIImageView *backgroundImage;
     // create post view
@@ -39,7 +44,7 @@
     __weak IBOutlet UILabel *inviteFriendsTitleCard;
     __weak IBOutlet UITableView *inviteFriendsTable;
     //arrays to hold friends and selections
-    NSMutableArray *friends,*groups,*friendNames;
+    NSMutableArray *friends,*groups,*friendNames,*phoneNumberInvited;
     bool keepScrollingInvite;
     
     // create send view
@@ -48,16 +53,23 @@
     
     
     // inbox shit
+    NSMutableArray *arrayOfInvites;
     __weak IBOutlet UITableView *inboxtable;
     __weak IBOutlet UIScrollView *inboxscrollview;
     
     // upcoming
-
     __weak IBOutlet UITableView *upcomingtable;
+    NSMutableArray *activities;
+    __weak IBOutlet UITextField *activityMessageField;
+    int numberOfMessages;
+    __weak IBOutlet UILabel *upcomingTitle;
+    NSIndexPath *currentActivity;
+    NSString *currentActivityID;
 }
 
 @property (nonatomic) NSString *groupNameNew;
 @property (nonatomic) NSMutableArray *groupMembersNew;
+- (IBAction)sendActivityButton:(id)sender;
 
 
 

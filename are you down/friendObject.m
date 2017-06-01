@@ -10,18 +10,18 @@
 
 @implementation friendObject
 
--(id)initWithDetails:(NSString*)name andFact:(NSString*)fact{
+-(id)initWithDetails:(NSString*)name andPhone:(NSString*)phone{
     self = [super init];
     if (self) {
         self.name = name;
-        self.fact = fact;
+        self.phone = phone;
         self.selected = [NSNumber numberWithBool:NO];
     }
     return self;
 }
 
-+(instancetype) FriendWithName:(NSString*)name andFact:(NSString*)fact{
-    friendObject *object = [[friendObject alloc] initWithDetails:name andFact:fact];
++(instancetype) FriendWithName:(NSString*)name andPhone:(NSString*)phone{
+    friendObject *object = [[friendObject alloc] initWithDetails:name andPhone:phone];
     return object;
 }
 
