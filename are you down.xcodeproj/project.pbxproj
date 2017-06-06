@@ -28,14 +28,22 @@
 		AD867C171ECEA329002C195A /* UIColor+BFPaperColors.m in Sources */ = {isa = PBXBuildFile; fileRef = AD867C161ECEA329002C195A /* UIColor+BFPaperColors.m */; };
 		AD867C1E1ECEB2B7002C195A /* PostFriendsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD867C1C1ECEB2B7002C195A /* PostFriendsTableCell.m */; };
 		AD867C1F1ECEB2B7002C195A /* PostFriendsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD867C1D1ECEB2B7002C195A /* PostFriendsTableCell.xib */; };
+		AD99B3E91EE224FB00E709F5 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD99B3E81EE224FB00E709F5 /* UserNotifications.framework */; };
 		AD9B04E11ED62A4900D03F7A /* InboxTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9B04DF1ED62A4900D03F7A /* InboxTableCell.m */; };
 		AD9B04E21ED62A4900D03F7A /* InboxTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD9B04E01ED62A4900D03F7A /* InboxTableCell.xib */; };
+		ADB06C991EE748510071C0AE /* MainFour.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB06C981EE748510071C0AE /* MainFour.storyboard */; };
+		ADB06C9B1EE74D9C0071C0AE /* PostFriendsTableCellFour.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB06C9A1EE74D9C0071C0AE /* PostFriendsTableCellFour.xib */; };
+		ADB06C9D1EE74DC10071C0AE /* InboxTableCellFour.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB06C9C1EE74DC10071C0AE /* InboxTableCellFour.xib */; };
+		ADB06C9F1EE74DDA0071C0AE /* UpcomingTableCellFour.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB06C9E1EE74DDA0071C0AE /* UpcomingTableCellFour.xib */; };
 		ADF29C561ECEB469004C4E17 /* friendObject.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF29C551ECEB469004C4E17 /* friendObject.m */; };
 		ADF29C591ECEBDF5004C4E17 /* groupObject.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF29C581ECEBDF5004C4E17 /* groupObject.m */; };
 		ADF29C5C1ECED687004C4E17 /* EditGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF29C5B1ECED687004C4E17 /* EditGroup.m */; };
 		ADF29C621ECF4BE8004C4E17 /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ADF29C5F1ECF4BE8004C4E17 /* 0.jpg */; };
 		ADF29C631ECF4BE8004C4E17 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ADF29C601ECF4BE8004C4E17 /* 1.jpg */; };
 		ADF29C641ECF4BE8004C4E17 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ADF29C611ECF4BE8004C4E17 /* 2.jpg */; };
+		ADF47E8B1EE0B4E9003468D5 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ADF47E8A1EE0B4E9003468D5 /* bg.jpg */; };
+		ADFF14EF1EE080E7004B12D9 /* GuestListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFF14ED1EE080E7004B12D9 /* GuestListCell.m */; };
+		ADFF14F01EE080E7004B12D9 /* GuestListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADFF14EE1EE080E7004B12D9 /* GuestListCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,9 +106,14 @@
 		AD867C1B1ECEB2B7002C195A /* PostFriendsTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostFriendsTableCell.h; sourceTree = "<group>"; };
 		AD867C1C1ECEB2B7002C195A /* PostFriendsTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostFriendsTableCell.m; sourceTree = "<group>"; };
 		AD867C1D1ECEB2B7002C195A /* PostFriendsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostFriendsTableCell.xib; sourceTree = "<group>"; };
+		AD99B3E81EE224FB00E709F5 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		AD9B04DE1ED62A4900D03F7A /* InboxTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InboxTableCell.h; sourceTree = "<group>"; };
 		AD9B04DF1ED62A4900D03F7A /* InboxTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InboxTableCell.m; sourceTree = "<group>"; };
 		AD9B04E01ED62A4900D03F7A /* InboxTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InboxTableCell.xib; sourceTree = "<group>"; };
+		ADB06C981EE748510071C0AE /* MainFour.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainFour.storyboard; sourceTree = "<group>"; };
+		ADB06C9A1EE74D9C0071C0AE /* PostFriendsTableCellFour.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostFriendsTableCellFour.xib; sourceTree = "<group>"; };
+		ADB06C9C1EE74DC10071C0AE /* InboxTableCellFour.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InboxTableCellFour.xib; sourceTree = "<group>"; };
+		ADB06C9E1EE74DDA0071C0AE /* UpcomingTableCellFour.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpcomingTableCellFour.xib; sourceTree = "<group>"; };
 		ADF29C541ECEB469004C4E17 /* friendObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = friendObject.h; sourceTree = "<group>"; };
 		ADF29C551ECEB469004C4E17 /* friendObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = friendObject.m; sourceTree = "<group>"; };
 		ADF29C571ECEBDF5004C4E17 /* groupObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = groupObject.h; sourceTree = "<group>"; };
@@ -110,6 +123,10 @@
 		ADF29C5F1ECF4BE8004C4E17 /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
 		ADF29C601ECF4BE8004C4E17 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		ADF29C611ECF4BE8004C4E17 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
+		ADF47E8A1EE0B4E9003468D5 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
+		ADFF14EC1EE080E7004B12D9 /* GuestListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestListCell.h; sourceTree = "<group>"; };
+		ADFF14ED1EE080E7004B12D9 /* GuestListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuestListCell.m; sourceTree = "<group>"; };
+		ADFF14EE1EE080E7004B12D9 /* GuestListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuestListCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD99B3E91EE224FB00E709F5 /* UserNotifications.framework in Frameworks */,
 				AD04E4301EDE21070087BD07 /* Contacts.framework in Frameworks */,
 				AD867C141ECEA1CA002C195A /* AVFoundation.framework in Frameworks */,
 			);
@@ -201,6 +219,7 @@
 				AD867BD91ECE9A28002C195A /* AppDelegate.h */,
 				AD867BDA1ECE9A28002C195A /* AppDelegate.m */,
 				AD867BDF1ECE9A28002C195A /* Main.storyboard */,
+				ADB06C981EE748510071C0AE /* MainFour.storyboard */,
 				AD867BE21ECE9A28002C195A /* Assets.xcassets */,
 				AD867BE41ECE9A28002C195A /* LaunchScreen.storyboard */,
 				AD867BE71ECE9A28002C195A /* Info.plist */,
@@ -220,6 +239,7 @@
 		AD867BD61ECE9A28002C195A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ADF47E8A1EE0B4E9003468D5 /* bg.jpg */,
 				ADF29C5F1ECF4BE8004C4E17 /* 0.jpg */,
 				ADF29C601ECF4BE8004C4E17 /* 1.jpg */,
 				ADF29C611ECF4BE8004C4E17 /* 2.jpg */,
@@ -253,6 +273,7 @@
 		AD867C121ECEA1CA002C195A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD99B3E81EE224FB00E709F5 /* UserNotifications.framework */,
 				AD04E42F1EDE21070087BD07 /* Contacts.framework */,
 				AD04E42D1EDE20140087BD07 /* AddressBook.framework */,
 				AD48D0B31ED4CC4F00F22122 /* Intents.framework */,
@@ -268,12 +289,18 @@
 				AD867C1B1ECEB2B7002C195A /* PostFriendsTableCell.h */,
 				AD867C1C1ECEB2B7002C195A /* PostFriendsTableCell.m */,
 				AD867C1D1ECEB2B7002C195A /* PostFriendsTableCell.xib */,
+				ADB06C9A1EE74D9C0071C0AE /* PostFriendsTableCellFour.xib */,
 				AD9B04DE1ED62A4900D03F7A /* InboxTableCell.h */,
 				AD9B04DF1ED62A4900D03F7A /* InboxTableCell.m */,
 				AD9B04E01ED62A4900D03F7A /* InboxTableCell.xib */,
+				ADB06C9C1EE74DC10071C0AE /* InboxTableCellFour.xib */,
 				AD5B5A1C1ED7645F00A06FC1 /* UpcomingTableCell.h */,
 				AD5B5A1D1ED7645F00A06FC1 /* UpcomingTableCell.m */,
 				AD5B5A1E1ED7645F00A06FC1 /* UpcomingTableCell.xib */,
+				ADFF14EC1EE080E7004B12D9 /* GuestListCell.h */,
+				ADFF14ED1EE080E7004B12D9 /* GuestListCell.m */,
+				ADFF14EE1EE080E7004B12D9 /* GuestListCell.xib */,
+				ADB06C9E1EE74DDA0071C0AE /* UpcomingTableCellFour.xib */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -392,8 +419,11 @@
 						DevelopmentTeam = UD5W2M958Y;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
-							com.apple.Siri = {
+							com.apple.Push = {
 								enabled = 1;
+							};
+							com.apple.Siri = {
+								enabled = 0;
 							};
 						};
 					};
@@ -452,15 +482,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADF47E8B1EE0B4E9003468D5 /* bg.jpg in Resources */,
 				ADF29C621ECF4BE8004C4E17 /* 0.jpg in Resources */,
 				AD867BE61ECE9A28002C195A /* LaunchScreen.storyboard in Resources */,
 				ADF29C641ECF4BE8004C4E17 /* 2.jpg in Resources */,
 				AD9B04E21ED62A4900D03F7A /* InboxTableCell.xib in Resources */,
 				AD867BE31ECE9A28002C195A /* Assets.xcassets in Resources */,
 				ADF29C631ECF4BE8004C4E17 /* 1.jpg in Resources */,
+				ADB06C991EE748510071C0AE /* MainFour.storyboard in Resources */,
+				ADFF14F01EE080E7004B12D9 /* GuestListCell.xib in Resources */,
+				ADB06C9B1EE74D9C0071C0AE /* PostFriendsTableCellFour.xib in Resources */,
 				AD867C1F1ECEB2B7002C195A /* PostFriendsTableCell.xib in Resources */,
 				AD5B5A201ED7645F00A06FC1 /* UpcomingTableCell.xib in Resources */,
 				AD867BE11ECE9A28002C195A /* Main.storyboard in Resources */,
+				ADB06C9D1EE74DC10071C0AE /* InboxTableCellFour.xib in Resources */,
+				ADB06C9F1EE74DDA0071C0AE /* UpcomingTableCellFour.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +549,7 @@
 				AD867C1E1ECEB2B7002C195A /* PostFriendsTableCell.m in Sources */,
 				AD867C171ECEA329002C195A /* UIColor+BFPaperColors.m in Sources */,
 				ADF29C591ECEBDF5004C4E17 /* groupObject.m in Sources */,
+				ADFF14EF1EE080E7004B12D9 /* GuestListCell.m in Sources */,
 				AD5B5A261ED7827D00A06FC1 /* ActivityObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

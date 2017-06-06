@@ -16,6 +16,28 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    CGSize iOSDeviceScreenSize = [[UIScreen mainScreen] bounds].size;
+    if (iOSDeviceScreenSize.height == 568) {
+        UIStoryboard *iPhone4Storyboard = [UIStoryboard storyboardWithName:@"MainFour" bundle:nil];
+        
+        UIViewController *initialViewController = [iPhone4Storyboard instantiateInitialViewController];
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.window.rootViewController  = initialViewController;
+        [self.window makeKeyAndVisible];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:@" " forKey:@"updateFriends"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    center.delegate = self;
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+        if( !error ){
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        } else {
+            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"token"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }];
+    /*
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"phone"]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -25,9 +47,43 @@
         self.window.rootViewController = viewController;
         [self.window makeKeyAndVisible];
     }
-    
+    */
     // Override point for customization after application launch.
     return YES;
+}
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(nonnull NSData *)deviceToken {
+    const unsigned *tokenBytes = [deviceToken bytes];
+    NSString *hexToken = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    NSLog(@"%@",hexToken);
+    [[NSUserDefaults standardUserDefaults] setObject:hexToken forKey:@"token"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+}
+
+-(void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(nonnull NSError *)error {
+    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"token"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
+    
+    //Called when a notification is delivered to a foreground app.
+    [[NSUserDefaults standardUserDefaults] setObject:@"Message Recieved" forKey:@"refreshMessages"];
+    NSLog(@"Userinfo %@",notification.request.content.userInfo);
+    
+    completionHandler(UNNotificationPresentationOptionAlert);
+}
+
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler{
+    
+    //Called to let your app know which action was selected by the user for a given notification.
+    
+    NSLog(@"Userinfo %@",response.notification.request.content.userInfo);
+    
 }
 
 

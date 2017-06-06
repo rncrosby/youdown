@@ -20,12 +20,13 @@
     NSString *oldName;
     bool anyGroupMembers;
 }
-
+@property (nonatomic) NSNumber *isNewGroup;
 @property (nonatomic) NSString *groupName;
 @property (nonatomic) NSMutableArray *friendList;
 @property (nonatomic) groupObject *group;
 - (IBAction)close:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *groupNameField;
+- (IBAction)cancel:(id)sender;
 
 
 @end

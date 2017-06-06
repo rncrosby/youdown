@@ -12,6 +12,7 @@
 @synthesize activity;
 
 - (void)awakeFromNib {
+    _moreScroll.contentSize =CGSizeMake(self.frame.size.width*2, _moreScroll.frame.size.height);
     [super awakeFromNib];
     // Initialization code
 }
@@ -110,5 +111,37 @@
         response = @"i didnt quite get that";
     }
     return response;
+}
+- (IBAction)goToChat:(id)sender {
+    [_moreScroll setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
+- (IBAction)goToPeople:(id)sender {
+    [_moreScroll setContentOffset:CGPointMake(self.frame.size.width, 0) animated:YES];
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSArray *guests = [activity valueForKey:@"guestNames"];
+    return 2;
+ 
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
+    if(cell == nil)
+    {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
+    }
+    cell.textLabel.text = @"rob";
+    cell.detailTextLabel.text = @"5105416477";
+    return cell;
+    
 }
 @end

@@ -13,8 +13,10 @@
 #import "PostView.h"
 
 @interface StartView : UIViewController <UITextFieldDelegate> {
+    bool isSignIn;
     bool doSignIn;
     NSString *activationCode;
+    NSString *notificationToken;
     NSMutableArray *contacts;
     NSMutableArray *contactNames;
     NSMutableArray *contactPhoneNumbers;

@@ -23,6 +23,8 @@
                   action:@selector(textFieldDidChange:)
         forControlEvents:UIControlEventEditingChanged];
     [super viewDidLoad];
+    contactNames = [[NSMutableArray alloc] init];
+    contactPhoneNumbers = [[NSMutableArray alloc] init];
     // Do any additional setup after loading the view.
 }
 
@@ -51,9 +53,7 @@
 -(void)signup{
     activationCode = [References randomIntWithLength:4];
     NSLog(@"%@",activationCode);
-    [[NSUserDefaults standardUserDefaults] setObject:commonName.text forKey:@"name"];
-    [[NSUserDefaults standardUserDefaults] setObject:phoneNumber.text forKey:@"phone"];
-    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/signUp"];
+    NSURL *url = [NSURL URLWithString:@"http://138.197.217.29:5000/signUp"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = @"POST";
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -65,8 +65,8 @@
             @"friendNames"     : contactNames,
             @"friendNumbers"     : contactPhoneNumbers,
             @"name"       : commonName.text,
+            @"token"    : [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],
             @"phone"         : phoneNumber.text,
-            @"token"    : @"123456789",
             @"activationCode"   : activationCode
             };
     
@@ -82,6 +82,8 @@
                                    // Returned Error
                                    NSLog(@"Unknown Error Occured");
                                } else {
+                                   [[NSUserDefaults standardUserDefaults] setObject:commonName.text forKey:@"name"];
+                                   [[NSUserDefaults standardUserDefaults] setObject:phoneNumber.text forKey:@"phone"];
                                    //NSMutableDictionary *activity = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
                                    [References moveUp:signUpScroll yChange:[References screenHeight]];
                                    [References moveUp:verificationScroll yChange:[References screenHeight]];
@@ -94,8 +96,7 @@
 
 -(void)signin{
     activationCode = [References randomIntWithLength:4];
-    [[NSUserDefaults standardUserDefaults] setObject:phoneNumber.text forKey:@"phone"];
-    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/signIn"];
+    NSURL *url = [NSURL URLWithString:@"http://138.197.217.29:5000/signIn"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = @"POST";
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -105,6 +106,7 @@
     NSDictionary *tmp = [[NSDictionary alloc] init];
     tmp = @{
             @"phone"         : phoneNumber.text,
+            @"token"    : [[NSUserDefaults standardUserDefaults] objectForKey:@"token"],
             @"activationCode"   : activationCode
             };
     
@@ -122,13 +124,15 @@
                                } else {
                                    //NSMutableDictionary *activity = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
                                    NSString *responseBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                                   if ([responseBody isEqualToString:@"Success"]) {
+                                   if ([responseBody containsString:@"sorry"]) {
+                                       [References toastMessage:responseBody andView:self];
+                                   } else {
+                                       [[NSUserDefaults standardUserDefaults] setObject:responseBody forKey:@"name"];
+                                       [[NSUserDefaults standardUserDefaults] setObject:phoneNumber.text forKey:@"phone"];
                                        doSignIn =true;
                                        [References moveUp:signUpScroll yChange:[References screenHeight]];
                                        [References moveUp:verificationScroll yChange:[References screenHeight]];
                                        codeTemp.text = activationCode;
-                                   } else {
-                                       [References toastMessage:responseBody andView:self];
                                    }
                                 
                                    //[References toastMessage:[NSString stringWithFormat:@"your code is: %@",activationCode] andView:self];
@@ -173,8 +177,6 @@
 }
 
 - (void)getAllContacts {
-    contactNames = [[NSMutableArray alloc] init];
-    contactPhoneNumbers = [[NSMutableArray alloc] init];
     [contactPhoneNumbers removeAllObjects];
     [contactNames removeAllObjects];
     CNContactStore *addressBook = [[CNContactStore alloc] init];
@@ -185,7 +187,7 @@
                                         usingBlock:^(CNContact* __nonnull contact, bool * __nonnull stop){
                                             NSArray *digits = [[contact.phoneNumbers valueForKey:@"value"] valueForKey:@"digits"];
                                             NSString *name = [NSString stringWithFormat:@"%@ %@",contact.givenName,contact.familyName];
-                                            if (digits.count != 0) {
+                                            if ((digits.count != 0) && (name.length > 1)) {
                                                 [contactPhoneNumbers addObject:digits[0]];
                                                 [contactNames addObject:name];
                                             }

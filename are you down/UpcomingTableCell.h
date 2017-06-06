@@ -10,7 +10,7 @@
 #import "References.h"
 #import "ActivityObject.h"
 
-@interface UpcomingTableCell : UITableViewCell <UITextFieldDelegate> {
+@interface UpcomingTableCell : UITableViewCell <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource> {
     int currentMessagePosition, numberOfMessages;
     bool respond;
     NSMutableArray *messages;
@@ -25,6 +25,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *card;
 @property (weak, nonatomic) IBOutlet UILabel *activityName;
 @property (weak, nonatomic) IBOutlet UILabel *guestListLabel;
+@property (weak, nonatomic) IBOutlet UIScrollView *moreScroll;
+@property (weak, nonatomic) IBOutlet UITableView *guestTable;
+- (IBAction)goToChat:(id)sender;
+- (IBAction)goToPeople:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *more;
 
 
 @end

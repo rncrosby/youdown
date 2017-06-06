@@ -19,6 +19,8 @@
 - (void)viewDidLoad {
     friends = [[NSMutableArray alloc] init];
      arrayOfInvites = [[NSMutableArray alloc] init];
+    groups = [[NSMutableArray alloc] init];
+    friendNumbers = [[NSMutableArray alloc] init];
     alertIsShowing = NO;
     groupSelected = @"";
     keepScrollingCreatePost = YES;
@@ -37,6 +39,7 @@
     
     [References cornerRadius:createPostCard radius:10.0f];
     [References cornerRadius:inviteFriendsTitleCard radius:10.0f];
+    /*
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
         // Has camera
         AVCaptureSession *session = [[AVCaptureSession alloc] init];
@@ -55,7 +58,23 @@
         [self.view insertSubview:blurView atIndex:0];
         [self.view.layer insertSublayer:newCaptureVideoPreviewLayer atIndex:0];
         [session startRunning];
-    }
+    } else {*/
+        UIImageView *bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [References screenWidth], [References screenHeight])];
+        bgImage.contentMode = UIViewContentModeScaleAspectFill;
+        [bgImage setImage:[UIImage imageNamed:@"bg.jpg"]];
+        [self.view addSubview:bgImage];
+        UIView *blurView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [References screenWidth], [References screenHeight])];
+        [References blurView:blurView];
+        [self.view insertSubview:blurView atIndex:0];
+        [self.view sendSubviewToBack:bgImage];
+    //}
+
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshUpcoming:) forControlEvents:UIControlEventValueChanged];
+    [upcomingtable addSubview:refreshControl];
+    UIRefreshControl *refreshControldos = [[UIRefreshControl alloc] init];
+    [refreshControldos addTarget:self action:@selector(refreshFriends:) forControlEvents:UIControlEventValueChanged];
+    [inviteFriendsTable addSubview:refreshControldos];
         [super viewDidLoad];
 
     createPostScroll.contentSize = CGSizeMake([References screenWidth]*3, [References screenHeight]);
@@ -63,13 +82,66 @@
     createPostScroll.contentOffset = CGPointMake([References screenWidth], 0);
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(defaultsDidChange:) name:NSUserDefaultsDidChangeNotification
+                                               object:nil];
     [self getActivities];
     [self getInvites];
     [self getFriends];
 }
 
+- (void)defaultsDidChange:(NSNotification *)aNotification
+{
+    NSString *message =[[NSUserDefaults standardUserDefaults] objectForKey:@"refreshMessages"];
+    if (message.length > 1) {
+        [self getActivities];
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"refreshMessages"];
+    }
+}
+
+- (void)refreshUpcoming:(UIRefreshControl *)refreshControl
+{
+    [self getActivities];
+    [refreshControl endRefreshing];
+}
+
+- (void)refreshFriends:(UIRefreshControl *)refreshControl
+{
+    [self getFriends];
+    [refreshControl endRefreshing];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
-    [inviteFriendsTable reloadData];
+    NSString *text = [[NSUserDefaults standardUserDefaults] objectForKey:@"updateFriends"];
+    if (text.length > 5) {
+        NSLog(@"detected change, refreshing friends and groups");
+        [groups removeAllObjects];
+        [friends removeAllObjects];
+        NSArray *seperator = [text componentsSeparatedByString:@"!@!@"];
+        NSArray *allGroups = [seperator[0] componentsSeparatedByString:@"#$#$"];
+        for (int a = 0; a < allGroups.count-1; a++) {
+            NSArray *tempGroup = [allGroups[a] componentsSeparatedByString:@"*&^"];
+            NSMutableArray *tempGroupMembers = [[NSMutableArray alloc] init];
+            for (int b = 1; b < tempGroup.count-1; b++) {
+                [tempGroupMembers addObject:tempGroup[b]];
+            }
+            groupObject *tempGroupObject = [groupObject GroupWithName:tempGroup[0] andMembers:tempGroupMembers];
+            [groups addObject:tempGroupObject];
+        }
+        NSArray *allFriends = [seperator[1] componentsSeparatedByString:@"***"];
+        friends = [[NSMutableArray alloc] init];
+        for (int a = 0; a < allFriends.count-1; a++) {
+            NSArray *person = [allFriends[a] componentsSeparatedByString:@"@#$@"];
+            friendObject *friend = [friendObject FriendWithName:person[1] andPhone:person[2]];
+            [friendNumbers addObject:person[2]];
+            [friends addObject:friend];
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:@" " forKey:@"updateFriends"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [inviteFriendsTable reloadData];
+     
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,6 +169,9 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField.tag == 10) {
         [self sendMessage:currentActivityID];
+        [References moveDown:activityMessageField yChange:keyboardHeight.size.height];
+        [References moveDown:upcomingtable yChange:keyboardHeight.size.height];
+        [References moveDown:upcomingTitle yChange:keyboardHeight.size.height];
         [textField resignFirstResponder];
        
     } else {
@@ -151,14 +226,17 @@
         inboxscrollview.contentSize = CGSizeMake([References screenWidth], 107 + (5*124)+5);
         inboxtable.frame = CGRectMake(inboxtable.frame.origin.x, inboxtable.frame.origin.y, inboxtable.frame.size.width, 5*124);
         return arrayOfInvites.count;
-    } else {
+    } else if (tableView.tag == 5){
         if (section == 0) {
-            //return groups.count;
-            return 0;
+            return groups.count;
         } else {
             return friends.count;
         }
 
+    } else {
+        ActivityObject *activity = activities[currentActivity.row];
+        NSArray *people = [activity valueForKey:@"guests"];
+        return people.count;
     }
 }
 
@@ -167,8 +245,10 @@
         return 1;
     } else if (tableView.tag == 25) {
         return 1;
-    } else {
+    } else if (tableView.tag == 5){
             return 2;
+    } else {
+        return 1;
     }
 
 }
@@ -177,12 +257,14 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == 50) {
-        static NSString *simpleTableIdentifier = @"UpcomingTableCell";
-        
+        NSString *simpleTableIdentifier = @"UpcomingTableCell";
+        if ([References screenWidth] == 320) {
+            simpleTableIdentifier = @"UpcomingTableCellFour";
+        }
         UpcomingTableCell *cell = (UpcomingTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         if (cell == nil)
         {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"UpcomingTableCell" owner:self options:nil];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:simpleTableIdentifier owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
         currentActivity = indexPath;
@@ -215,12 +297,14 @@
         return cell;
 
     } else if (tableView.tag == 25 ) {
-        static NSString *simpleTableIdentifier = @"InboxTableCell";
-        
+        NSString *simpleTableIdentifier = @"InboxTableCell";
+        if ([References screenWidth] == 320) {
+            simpleTableIdentifier = @"InboxTableCellFour";
+        }
         InboxTableCell *cell = (InboxTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         if (cell == nil)
         {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InboxTableCell" owner:self options:nil];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:simpleTableIdentifier owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
         [References cornerRadius:cell.card radius:10.0f];
@@ -233,13 +317,15 @@
         [cell.yeah addTarget:self action:@selector(willAttend:) forControlEvents:UIControlEventTouchUpInside];
         cell.backgroundColor = [UIColor clearColor];
             return cell;
-    } else {
-    static NSString *simpleTableIdentifier = @"PostFriendsTableCell";
-    
+    } else  if (tableView.tag == 5) {
+    NSString *simpleTableIdentifier = @"PostFriendsTableCell";
+    if ([References screenWidth] == 320) {
+        simpleTableIdentifier = @"PostFriendsTableCellFour";
+    }
     PostFriendsTableCell *cell = (PostFriendsTableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     if (cell == nil)
     {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PostFriendsTableCell" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:simpleTableIdentifier owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
     cell.backgroundColor = [UIColor clearColor];
@@ -282,6 +368,23 @@
     }
     return cell;
     }
+    else {
+        static NSString *simpleTableIdentifier = @"GuestListCell";
+        
+        GuestListCell *cell = (GuestListCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        if (cell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:simpleTableIdentifier owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+        }
+        ActivityObject *activity = activities[currentActivity.row];
+        NSMutableArray *names = [activity valueForKey:@"guestNames"];
+        NSMutableArray *numbers = [activity valueForKey:@"guests"];
+        cell.name.text = names[indexPath.row];
+        cell.number.text = numbers[indexPath.row];
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+    }
 }
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)tapGesture {
@@ -298,10 +401,7 @@
         
         [actionSheet addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Delete %@",cell.name.text] style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
             alertIsShowing = NO;
-            // Distructive button tapped.
-            [self dismissViewControllerAnimated:YES completion:^{
-                
-            }];
+            [self deleteGroup:cell.name.text];
         }]];
         
         [actionSheet addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Modify %@",cell.name.text] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -334,15 +434,15 @@
         }
         NSMutableArray *arrayOfMembers = [group valueForKey:@"members"];
         for (int a = 0; a < arrayOfMembers.count; a++) {
-            for(int b = 0; b < friendNames.count; b++) {
-                if (arrayOfMembers[a] == friendNames[b]) {
-                    friendObject *friend = friends[b];
-                    if ([friend valueForKey:@"selected"] == [NSNumber numberWithBool:YES]) {
-                                            [friend setValue:[NSNumber numberWithBool:NO] forKey:@"selected"];
-                    } else {
-                                            [friend setValue:[NSNumber numberWithBool:YES] forKey:@"selected"];
+            for(int b = 0; b < friends.count; b++) {
+                    if ([arrayOfMembers[a] isEqualToString:[friends[b] valueForKey:@"phone"]]) {
+                        friendObject *friend = friends[b];
+                        if ([friend valueForKey:@"selected"] == [NSNumber numberWithBool:YES]) {
+                            [friend setValue:[NSNumber numberWithBool:NO] forKey:@"selected"];
+                        } else {
+                            [friend setValue:[NSNumber numberWithBool:YES] forKey:@"selected"];
+                        }
                     }
-                }
             }
         }
         [inviteFriendsTable reloadData];
@@ -371,8 +471,10 @@
     }
     else if (tableView.tag == 25) {
         return 124;
-    } else {
+    } else if (tableView.tag == 5){
             return 65;
+    } else {
+        return 47;
     }
 }
 
@@ -394,7 +496,6 @@
     int bubbleHeight = 30;
     if (numberofLines > 1) {
         bubbleHeight = bubbleHeight + (numberofLines*8);
-        NSLog(@"%i",bubbleHeight);
     }
     int xPosition;
     
@@ -453,7 +554,7 @@
     if (createPostText.text.length < 1) {
         [References toastMessage:@"you forgot to tell your friends what it is they could be down for" andView:self];
     } else {
-    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/postActivity"];
+    NSURL *url = [NSURL URLWithString:@"http://138.197.217.29:5000/postActivity"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = @"POST";
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -463,7 +564,8 @@
     NSDictionary *tmp = [[NSDictionary alloc] init];
     tmp = @{
             @"pending"     : pending,
-            @"creator"     : [[NSUserDefaults standardUserDefaults] objectForKey:@"username"],
+            @"creator"     : [[NSUserDefaults standardUserDefaults] objectForKey:@"name"],
+            @"message"  : @"test",
             @"phone"    : [[NSUserDefaults standardUserDefaults] objectForKey:@"phone"],
             @"actID"       : actID,
             @"name"         : createPostText.text
@@ -483,7 +585,6 @@
                                } else {
                                    //NSMutableDictionary *activity = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
                                    NSString *responseBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                                   NSLog(@"%@",responseBody);
                                }
                            }];
     }
@@ -497,13 +598,33 @@
         }
     }
     NSString *activity =[References randomStringWithLength:16];
-    NSLog(@"%@",activity);
     [self postActivity:phoneNumberInvited andID:activity];
 }
 
+- (IBAction)createGroup:(id)sender {
+    groupObject *group = [groupObject GroupWithName:@"" andMembers:[[NSMutableArray alloc] init]];
+    EditGroup *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EditGroup"];
+    viewController.friendList = friends;
+    viewController.isNewGroup = [NSNumber numberWithBool:YES];
+    viewController.group = [group valueForKey:@"members"];
+    viewController.groupName = [group valueForKey:@"name"];
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (IBAction)addFriend:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Find Friend" message:@"enter the phone number and name for the friend you want to add. (the name will be how you see it on your friends list)" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Add Friend", nil];
+    alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+    [alert textFieldAtIndex:1].secureTextEntry = NO; //Will disable secure text entry for second textfield.
+    [alert textFieldAtIndex:0].placeholder = @"name"; //Will replace "Username"
+    [alert textFieldAtIndex:1].placeholder = @"phone number"; //Will replace "Password"
+    [alert show];
+}
+
 -(void)sendMessage:(NSString*)actID{
+    ActivityObject *activity = activities[currentActivity.row];
+    NSString *notifMessage = [NSString stringWithFormat:@"#%@ %@: %@", [activity valueForKey:@"name"],[[NSUserDefaults standardUserDefaults] objectForKey:@"name"], activityMessageField.text];
     NSString *message = [NSString stringWithFormat:@"%@^*&%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"phone"],activityMessageField.text];
-    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/sendMessage"];
+    NSURL *url = [NSURL URLWithString:@"http://138.197.217.29:5000/sendMessage"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = @"POST";
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -514,6 +635,7 @@
     tmp = @{
             @"actID"     : actID,
             @"message"     : message,
+            @"notifMessage" : notifMessage,
             @"phone"    : [[NSUserDefaults standardUserDefaults] objectForKey:@"phone"]
             };
     
@@ -536,8 +658,9 @@
                                        NSArray *activityArray = [tempArrayActivities[a] componentsSeparatedByString:@"!@#"];
                                        NSMutableArray *messages = [[NSMutableArray alloc] initWithArray:[activityArray[4] componentsSeparatedByString:@"&*^"]];
                                        NSMutableArray *pending = [[NSMutableArray alloc] initWithArray:[activityArray[5] componentsSeparatedByString:@"$#$"]];
+                                        NSMutableArray *names = [[NSMutableArray alloc] initWithArray:[activityArray[7] componentsSeparatedByString:@"$#$"]];
                                        NSArray *attending = [activityArray[6] componentsSeparatedByString:@"@~!"];
-                                       ActivityObject *activity = [ActivityObject ActivityWithName:activityArray[2] andGuests:pending andMessages:messages andAttending:[[NSMutableArray alloc] initWithArray:attending] andID:activityArray[1]];
+                                       ActivityObject *activity = [ActivityObject ActivityWithName:activityArray[2] andGuests:pending andMessages:messages andAttending:[[NSMutableArray alloc] initWithArray:attending] andID:activityArray[1] andNames:names andCreator:activityArray[8]];
                                        [activities addObject:activity];
                                    }
                                    [upcomingtable reloadData];
@@ -552,7 +675,7 @@
 }
 
 -(void)amAttending:(NSString*)actID{
-    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/amAttending"];
+    NSURL *url = [NSURL URLWithString:@"http://138.197.217.29:5000/amAttending"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = @"POST";
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -582,7 +705,6 @@
                                        [arrayOfInvites removeAllObjects];
                                        [inboxtable reloadData];
                                    } else {
-                                   NSLog(@"%@",responseBody);
                                    NSArray *tempArrayOfInvites = [responseBody componentsSeparatedByString:@"***"];
                                    for (int a = 0; a < tempArrayOfInvites.count-1; a++) {
                                        NSArray *tempInvite = [tempArrayOfInvites[a] componentsSeparatedByString:@"!@#"];
@@ -597,7 +719,7 @@
 
 
 -(void)getInvites{
-    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/getMyInvites"];
+    NSURL *url = [NSURL URLWithString:@"http://138.197.217.29:5000/getMyInvites"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = @"POST";
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -622,7 +744,6 @@
                                    NSLog(@"Unknown Error Occured");
                                } else {
                                    NSString *responseBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                                   NSLog(@"%@",responseBody);
                                    NSArray *tempArrayOfInvites = [responseBody componentsSeparatedByString:@"***"];
                                    for (int a = 0; a < tempArrayOfInvites.count-1; a++) {
                                        NSArray *tempInvite = [tempArrayOfInvites[a] componentsSeparatedByString:@"!@#"];
@@ -635,7 +756,7 @@
 }
 
 -(void)getActivities{
-    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/getMyActivities"];
+    NSURL *url = [NSURL URLWithString:@"http://138.197.217.29:5000/getMyActivities"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = @"POST";
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -666,8 +787,11 @@
                                       NSArray *activityArray = [tempArrayActivities[a] componentsSeparatedByString:@"!@#"];
                                        NSMutableArray *messages = [[NSMutableArray alloc] initWithArray:[activityArray[4] componentsSeparatedByString:@"&*^"]];
                                        NSMutableArray *pending = [[NSMutableArray alloc] initWithArray:[activityArray[5] componentsSeparatedByString:@"$#$"]];
+                                       
                                        NSArray *attending = [activityArray[6] componentsSeparatedByString:@"@~!"];
-                                       ActivityObject *activity = [ActivityObject ActivityWithName:activityArray[2] andGuests:pending andMessages:messages andAttending:[[NSMutableArray alloc] initWithArray:attending] andID:activityArray[1]];
+                                       
+                                       NSMutableArray *names = [[NSMutableArray alloc] initWithArray:[activityArray[7] componentsSeparatedByString:@"$#$"]];
+                                       ActivityObject *activity = [ActivityObject ActivityWithName:activityArray[2] andGuests:pending andMessages:messages andAttending:[[NSMutableArray alloc] initWithArray:attending] andID:activityArray[1] andNames:names andCreator:activityArray[8]];
                                        [activities addObject:activity];
                                    }
                                    [upcomingtable reloadData];
@@ -676,7 +800,7 @@
 }
 
 -(void)getFriends{
-    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/getMyFriends"];
+    NSURL *url = [NSURL URLWithString:@"http://138.197.217.29:5000/getMyFriends"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = @"POST";
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -700,15 +824,26 @@
                                    // Returned Error
                                    NSLog(@"Unknown Error Occured");
                                } else {
+                                   [friends removeAllObjects];
+                                   [groups removeAllObjects];
                                    NSString *responseBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                                   NSLog(@"%@",responseBody);
-                                   
-                                   NSArray *tempArrayActivities = [responseBody componentsSeparatedByString:@"***"];
+                                   NSArray *seperator = [responseBody componentsSeparatedByString:@"!@!@"];
+                                   NSArray *allGroups = [seperator[0] componentsSeparatedByString:@"#$#$"];
+                                   for (int a = 0; a < allGroups.count-1; a++) {
+                                        NSArray *tempGroup = [allGroups[a] componentsSeparatedByString:@"*&^"];
+                                       NSMutableArray *tempGroupMembers = [[NSMutableArray alloc] init];
+                                       for (int b = 1; b < tempGroup.count-1; b++) {
+                                           [tempGroupMembers addObject:tempGroup[b]];
+                                       }
+                                       groupObject *tempGroupObject = [groupObject GroupWithName:tempGroup[0] andMembers:tempGroupMembers];
+                                       [groups addObject:tempGroupObject];
+                                   }
+                                   NSArray *allFriends = [seperator[1] componentsSeparatedByString:@"***"];
                                    friends = [[NSMutableArray alloc] init];
-                                   for (int a = 0; a < tempArrayActivities.count-1; a++) {
-                                       NSArray *person = [tempArrayActivities[a] componentsSeparatedByString:@"@#$@"];
-                                       NSLog(@"person: %@ phone: %@",person[1],person[2]);
+                                   for (int a = 0; a < allFriends.count-1; a++) {
+                                       NSArray *person = [allFriends[a] componentsSeparatedByString:@"@#$@"];
                                        friendObject *friend = [friendObject FriendWithName:person[1] andPhone:person[2]];
+                                       [friendNumbers addObject:person[2]];
                                        [friends addObject:friend];
                                    }
                                    
@@ -716,6 +851,125 @@
                                }
                            }];
 
+}
+
+-(void)deleteGroup:(NSString*)groupName{
+    NSURL *url = [NSURL URLWithString:@"http://138.197.217.29:5000/deleteGroup"];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request.HTTPMethod = @"POST";
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    // NSError *actualerror = [[NSError alloc] init];
+    // Parameters
+    NSDictionary *tmp = [[NSDictionary alloc] init];
+    tmp = @{
+            @"phone"     : [[NSUserDefaults standardUserDefaults] objectForKey:@"phone"],
+            @"groupName"    : groupName
+            };
+    
+    NSError *error;
+    NSData *postdata = [NSJSONSerialization dataWithJSONObject:tmp options:0 error:&error];
+    [request setHTTPBody:postdata];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response,
+                                               NSData *data,
+                                               NSError *error) {
+                               if (error) {
+                                   // Returned Error
+                                   NSLog(@"Unknown Error Occured");
+                               } else {
+                                   [friends removeAllObjects];
+                                   [groups removeAllObjects];
+                                   NSString *responseBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                   NSArray *seperator = [responseBody componentsSeparatedByString:@"!@!@"];
+                                   NSArray *allGroups = [seperator[0] componentsSeparatedByString:@"#$#$"];
+                                   for (int a = 0; a < allGroups.count-1; a++) {
+                                       NSArray *tempGroup = [allGroups[a] componentsSeparatedByString:@"*&^"];
+                                       NSMutableArray *tempGroupMembers = [[NSMutableArray alloc] init];
+                                       for (int b = 1; b < tempGroup.count-1; b++) {
+                                           [tempGroupMembers addObject:tempGroup[b]];
+                                       }
+                                       groupObject *tempGroupObject = [groupObject GroupWithName:tempGroup[0] andMembers:tempGroupMembers];
+                                       [groups addObject:tempGroupObject];
+                                   }
+                                   NSArray *allFriends = [seperator[1] componentsSeparatedByString:@"***"];
+                                   friends = [[NSMutableArray alloc] init];
+                                   for (int a = 0; a < allFriends.count-1; a++) {
+                                       NSArray *person = [allFriends[a] componentsSeparatedByString:@"@#$@"];
+                                       friendObject *friend = [friendObject FriendWithName:person[1] andPhone:person[2]];
+                                       [friendNumbers addObject:person[2]];
+                                       [friends addObject:friend];
+                                   }
+                                   
+                                   [inviteFriendsTable reloadData];
+                               }
+                           }];
+    
+}
+
+-(void)addFriend:(NSString*)phoneNumber andName:(NSString*)name{
+    NSURL *url = [NSURL URLWithString:@"http://138.197.217.29:5000/addFriend"];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request.HTTPMethod = @"POST";
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    // NSError *actualerror = [[NSError alloc] init];
+    // Parameters
+    NSDictionary *tmp = [[NSDictionary alloc] init];
+    tmp = @{
+            @"phone"     : [[NSUserDefaults standardUserDefaults] objectForKey:@"phone"],
+            @"otherPhone"    : phoneNumber,
+            @"otherName"    : name
+            };
+    
+    NSError *error;
+    NSData *postdata = [NSJSONSerialization dataWithJSONObject:tmp options:0 error:&error];
+    [request setHTTPBody:postdata];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response,
+                                               NSData *data,
+                                               NSError *error) {
+                               if (error) {
+                                   // Returned Error
+                                   NSLog(@"Unknown Error Occured");
+                               } else {
+                                   [References toastMessage:@"Friend Added!" andView:self];
+                                   [friends removeAllObjects];
+                                   [groups removeAllObjects];
+                                   NSString *responseBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                   NSArray *seperator = [responseBody componentsSeparatedByString:@"!@!@"];
+                                   NSArray *allGroups = [seperator[0] componentsSeparatedByString:@"#$#$"];
+                                   for (int a = 0; a < allGroups.count-1; a++) {
+                                       NSArray *tempGroup = [allGroups[a] componentsSeparatedByString:@"*&^"];
+                                       NSMutableArray *tempGroupMembers = [[NSMutableArray alloc] init];
+                                       for (int b = 1; b < tempGroup.count-1; b++) {
+                                           [tempGroupMembers addObject:tempGroup[b]];
+                                       }
+                                       groupObject *tempGroupObject = [groupObject GroupWithName:tempGroup[0] andMembers:tempGroupMembers];
+                                       [groups addObject:tempGroupObject];
+                                   }
+                                   NSArray *allFriends = [seperator[1] componentsSeparatedByString:@"***"];
+                                   friends = [[NSMutableArray alloc] init];
+                                   for (int a = 0; a < allFriends.count-1; a++) {
+                                       NSArray *person = [allFriends[a] componentsSeparatedByString:@"@#$@"];
+                                       friendObject *friend = [friendObject FriendWithName:person[1] andPhone:person[2]];
+                                       [friendNumbers addObject:person[2]];
+                                       [friends addObject:friend];
+                                   }
+                                   
+                                   [inviteFriendsTable reloadData];
+                               }
+                           }];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        NSString *name = [alertView textFieldAtIndex:0].text;
+        NSString *phone = [alertView textFieldAtIndex:1].text;
+        [self addFriend:phone andName:name];
+    }
 }
 
 @end

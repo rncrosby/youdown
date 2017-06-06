@@ -19,8 +19,9 @@
 #import "ActivityObject.h"
 #import "MessageObject.h"
 #import "SlimActivityObject.h"
+#import "GuestListCell.h"
 
-@interface PostView : UIViewController <UITextFieldDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource> {
+@interface PostView : UIViewController <UITextFieldDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate> {
     bool alertIsShowing;
     CGRect keyboardHeight;
     int currentmessagePosition;
@@ -44,7 +45,7 @@
     __weak IBOutlet UILabel *inviteFriendsTitleCard;
     __weak IBOutlet UITableView *inviteFriendsTable;
     //arrays to hold friends and selections
-    NSMutableArray *friends,*groups,*friendNames,*phoneNumberInvited;
+    NSMutableArray *friends,*groups,*friendNames,*phoneNumberInvited,*friendNumbers;
     bool keepScrollingInvite;
     
     // create send view
@@ -70,6 +71,8 @@
 @property (nonatomic) NSString *groupNameNew;
 @property (nonatomic) NSMutableArray *groupMembersNew;
 - (IBAction)sendActivityButton:(id)sender;
+- (IBAction)createGroup:(id)sender;
+- (IBAction)addFriend:(id)sender;
 
 
 
