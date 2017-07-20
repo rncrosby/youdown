@@ -16,16 +16,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    CGSize iOSDeviceScreenSize = [[UIScreen mainScreen] bounds].size;
-    if (iOSDeviceScreenSize.height == 568) {
-        UIStoryboard *iPhone4Storyboard = [UIStoryboard storyboardWithName:@"MainFour" bundle:nil];
-        
-        UIViewController *initialViewController = [iPhone4Storyboard instantiateInitialViewController];
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        self.window.rootViewController  = initialViewController;
-        [self.window makeKeyAndVisible];
-    }
     [[NSUserDefaults standardUserDefaults] setObject:@" " forKey:@"updateFriends"];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    //[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"name"];
+    //[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"phone"];
+    //NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"phone"]);
     [[NSUserDefaults standardUserDefaults] synchronize];
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     center.delegate = self;
@@ -37,17 +32,18 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }];
-    /*
-    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"phone"]) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        
-        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"PostView"];
-        
-        self.window.rootViewController = viewController;
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone4" bundle:nil];
+            UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"homeView"];
+            self.window.rootViewController = viewController;
+            [self.window makeKeyAndVisible];
+        } else {
+        UIStoryboard *iPhone4Storyboard = [UIStoryboard storyboardWithName:@"iPhone4" bundle:nil];
+        UIViewController *initialViewController = [iPhone4Storyboard instantiateInitialViewController];
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.window.rootViewController  = initialViewController;
         [self.window makeKeyAndVisible];
-    }
-    */
+        }
     // Override point for customization after application launch.
     return YES;
 }
@@ -79,7 +75,9 @@
 }
 
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler{
-    
+    NSInteger badgeCount = [[NSUserDefaults standardUserDefaults] integerForKey:@"updateFriends"];
+    badgeCount++;
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber: badgeCount];
     //Called to let your app know which action was selected by the user for a given notification.
     
     NSLog(@"Userinfo %@",response.notification.request.content.userInfo);
@@ -102,6 +100,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
 }
+
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

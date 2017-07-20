@@ -62,10 +62,16 @@
     view.layer.shadowOpacity = .1;
 }
 +(void)cardshadow:(UIView*)view {
-    view.layer.shadowOffset = CGSizeMake(0, 3);
-    view.layer.shadowRadius = 5;
+    view.layer.shadowOffset = CGSizeMake(0, 0);
+    view.layer.shadowRadius = 7;
     view.layer.shadowColor = [UIColor blackColor].CGColor;
-    view.layer.shadowOpacity = .1;
+    view.layer.shadowOpacity = .5;
+}
++(void)lightCardShadow:(UIView*)view {
+    view.layer.shadowOffset = CGSizeMake(0, 0);
+    view.layer.shadowRadius = 6;
+    view.layer.shadowColor = [UIColor blackColor].CGColor;
+    view.layer.shadowOpacity = .6;
 }
 
 +(void)fromoffscreen:(UIView*)view where:(NSString*)where{
@@ -202,7 +208,6 @@
 
 +(void)textFieldInset:(UITextField *)text{
     UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, text.frame.size.height)];
-    leftView.backgroundColor = text.backgroundColor;
     text.leftView = leftView;
     text.leftViewMode = UITextFieldViewModeAlways;
 }
@@ -216,7 +221,7 @@
 
 +(void)blurView:(UIView *)view {
     [view setBackgroundColor:[UIColor clearColor]];
-    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleProminent];
     UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     blurEffectView.frame = view.bounds;
     blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -283,10 +288,17 @@
     return randomString;
 }
 
-+(void)createLine:(UIView*)superview view:(UIView*)view xPos:(int)xPos yPos:(int)yPos{
++(void)createLine:(UIView*)superview xPos:(int)xPos yPos:(int)yPos{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(xPos, yPos, 1000, 1)];
+    [view setBackgroundColor:[UIColor lightGrayColor]];
+    view.alpha = 0.8;
+    [superview addSubview:view];
+}
+
++(void)ViewToLine:(UIView*)superview withView:(UIView*)view xPos:(int)xPos yPos:(int)yPos{
     view = [[UIView alloc] initWithFrame:CGRectMake(xPos, yPos, 1000, 1)];
     [view setBackgroundColor:[UIColor lightGrayColor]];
-    view.alpha = 0.5;
+    view.alpha = 0.8;
     [superview addSubview:view];
 }
 
@@ -322,6 +334,14 @@
     
     [view.layer insertSublayer:gradient atIndex:0];
     return view;
+}
+
++(CAGradientLayer*)createGradient:(UIColor*)colorA andColor:(UIColor*)colorB{
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    
+    gradient.frame = CGRectMake(-20,-20, 500, 500);
+    gradient.colors = @[(id)colorA.CGColor, (id)colorB.CGColor];
+    return gradient;
 }
 
 - (UIColor *)getUIColorObjectFromHexString:(NSString *)hexStr alpha:(CGFloat)alpha
@@ -362,10 +382,36 @@
     
     [view presentViewController:alert animated:YES completion:nil];
     
-    int duration = 3; // duration in seconds
+    int duration = 1.5; // duration in seconds
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, duration * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [alert dismissViewControllerAnimated:YES completion:nil];
     });
 }
+
++(void)parallax:(UIView *)view {
+    UIInterpolatingMotionEffect *verticalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc]
+     initWithKeyPath:@"center.y"
+     type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    verticalMotionEffect.minimumRelativeValue = @(-10);
+    verticalMotionEffect.maximumRelativeValue = @(10);
+    
+    // Set horizontal effect
+    UIInterpolatingMotionEffect *horizontalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc]
+     initWithKeyPath:@"center.x"
+     type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    horizontalMotionEffect.minimumRelativeValue = @(-10);
+    horizontalMotionEffect.maximumRelativeValue = @(10);
+    
+    // Create group to combine both
+    UIMotionEffectGroup *group = [UIMotionEffectGroup new];
+    group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];
+    
+    // Add both effects to your view
+    [view addMotionEffect:group];
+}
+
+
 @end

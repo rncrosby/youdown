@@ -22,6 +22,7 @@
 +(void)bottomshadow:(UIView*)view;
 +(void)topshadow:(UIView*)view;
 +(void)cardshadow:(UIView*)view;
++(void)lightCardShadow:(UIView*)view;
 +(void)fade:(UIView*)view alpha:(float)alpha;
 +(void)fromoffscreen:(UIView*)view where:(NSString*)where;
 +(void)fromonscreen:(UIView*)view where:(NSString*)where;
@@ -41,13 +42,15 @@
 +(void)fadeButtonTextColor:(UIButton*)view color:(UIColor*)color;
 +(void)fadeButtonColor:(UIButton*)view color:(UIColor*)color;
 +(void)tintUIButton:(UIButton*)button color:(UIColor*)color;
-+(void)createLine:(UIView*)superview view:(UIView*)view xPos:(int)xPos yPos:(int)yPos;
++(void)createLine:(UIView*)superview  xPos:(int)xPos yPos:(int)yPos;
++(void)ViewToLine:(UIView*)superview withView:(UIView*)view xPos:(int)xPos yPos:(int)yPos;
 +(void)fadeLabelText:(UILabel*)view newText:(NSString*)newText;
 +(void)moveHorizontal:(UIView*)view where:(NSString*)where;
 +(NSString *) randomStringWithLength: (int) len;
 +(NSString *) randomIntWithLength: (int) len;
 +(UIView*)createGradient:(UIColor*)colorA andColor:(UIColor*)colorB withFrame:(CGRect)frame;
-+(UIColor *)getUIColorObjectFromHexString:(NSString *)hexStr alpha:(CGFloat)alpha;
 +(void)fadeButtonText:(UIButton*)view text:(NSString*)text;
 +(void)toastMessage:(NSString*)message andView:(UIViewController*)view;
++(CAGradientLayer*)createGradient:(UIColor*)colorA andColor:(UIColor*)colorB;
++(void)parallax:(UIView*)view;
 @end

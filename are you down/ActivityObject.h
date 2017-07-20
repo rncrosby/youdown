@@ -11,12 +11,12 @@
 
 @interface ActivityObject : NSObject
 
-+(instancetype)ActivityWithName:(NSString*)name andGuests:(NSMutableArray*)guests andMessages:(NSMutableArray*)messages andAttending:(NSMutableArray*)attending andID:(NSString*)actID andNames:(NSMutableArray*)guestNames andCreator:(NSString*)creator;
++(instancetype)ActivityWithName:(NSString*)name andGuests:(NSMutableArray*)guests andMessages:(NSMutableArray*)messages andAttending:(NSMutableArray*)attending andID:(NSString*)actID andNames:(NSMutableArray*)guestNames andCreator:(NSString*)creator andTime:(NSNumber*)time;
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *actID;
 @property (nonatomic, strong) NSString *creator;
-
+@property (nonatomic, strong) NSNumber *time;
 @property (nonatomic, strong) NSMutableArray *guests;
 @property (nonatomic, strong) NSMutableArray *guestNames;
 @property (nonatomic, strong) NSMutableArray *messages;

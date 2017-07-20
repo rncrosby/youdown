@@ -10,7 +10,7 @@
 
 @implementation ActivityObject
 
--(id)initWithDetails:(NSString*)name andGuests:(NSMutableArray*)guests andAttending:(NSMutableArray*)attending andMessages:(NSMutableArray*)messages andID:(NSString*)actID andNames:(NSMutableArray*)guestNames andCreator:(NSString*)creator{
+-(id)initWithDetails:(NSString*)name andGuests:(NSMutableArray*)guests andAttending:(NSMutableArray*)attending andMessages:(NSMutableArray*)messages andID:(NSString*)actID andNames:(NSMutableArray*)guestNames andCreator:(NSString*)creator andTime:(NSNumber*)time{
     self = [super init];
     if (self) {
         self.name = name;
@@ -20,12 +20,12 @@
         self.attending = attending;
         self.creator = creator;
         self.actID = actID;
-        self.creator = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+        self.time = time;
     }
     return self;
 }
-+(instancetype)ActivityWithName:(NSString*)name andGuests:(NSMutableArray*)guests andMessages:(NSMutableArray*)messages andAttending:(NSMutableArray*)attending andID:(NSString*)actID andNames:(NSMutableArray*)guestNames andCreator:(NSString*)creator{
-    ActivityObject *object = [[ActivityObject alloc] initWithDetails:name andGuests:guests andAttending:attending andMessages:messages andID:actID andNames:guestNames andCreator:creator];
++(instancetype)ActivityWithName:(NSString*)name andGuests:(NSMutableArray*)guests andMessages:(NSMutableArray*)messages andAttending:(NSMutableArray*)attending andID:(NSString*)actID andNames:(NSMutableArray*)guestNames andCreator:(NSString*)creator andTime:(NSNumber *)time{
+    ActivityObject *object = [[ActivityObject alloc] initWithDetails:name andGuests:guests andAttending:attending andMessages:messages andID:actID andNames:guestNames andCreator:creator andTime:time];
     return object;
 }
 

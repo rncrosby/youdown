@@ -1,0 +1,8 @@
+person = personObject("rob","5105416477","12345",[],[],[],[])
+person.savePerson()
+person = personObject("troy","4157222509","12345",[],[],[],[])
+person.savePerson()
+person = personObject("leslie","5104832559","12345",[],[],[],[])
+person.savePerson()
+person = personObject("home","5104825316","12345",[],[],[],[])
+person.savePerson()
